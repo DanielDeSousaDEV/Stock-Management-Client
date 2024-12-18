@@ -1,31 +1,30 @@
 import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger } from "@Components/ui/navigation-menu";
-import { Outlet } from "react-router";
+import { Link, Outlet } from "react-router";
 
 export function HomeLayout() {
     return (
         <div className="container mx-auto py-4">
             <div className="flex flex-col">
-                <header className="flex flex-row justify-between items-center justify-center">
+                <header className="flex flex-row justify-between items-center content-center">
                     <h2 className="font-semibold text-2xl">Stock Manager System</h2>
 
                     <nav>
                         <NavigationMenu>
                             <NavigationMenuList>
                                 <NavigationMenuItem>
-                                    <NavigationMenuTrigger className="text-1xl">Produtos</NavigationMenuTrigger>
-                                    <NavigationMenuContent>
-                                        <div className="bg-zinc-300 p-2 truncate">
-                                            Cradastre e Gerencie seus produtos
-                                        </div>
-                                    </NavigationMenuContent>
+                                    <Link to=''>
+                                        <NavigationMenuLink className="text-1xl px-4 py-2 rounded-md font-semibold hover:bg-slate-100">Produtos</NavigationMenuLink>
+                                    </Link>
                                 </NavigationMenuItem>
                                 <NavigationMenuItem>
-                                    <NavigationMenuTrigger className="text-1xl">Localizações</NavigationMenuTrigger>
-                                    <NavigationMenuContent>
-                                        <div className="bg-zinc-300 p-2 truncate">
-                                            Cradastre e Gerencie suas Localizações
-                                        </div>
-                                    </NavigationMenuContent>
+                                    <Link to=''>
+                                        <NavigationMenuLink className="text-1xl px-4 py-2 rounded-md font-semibold hover:bg-slate-100">Localizações</NavigationMenuLink>
+                                    </Link>
+                                </NavigationMenuItem>
+                                <NavigationMenuItem>
+                                    <Link to=''>
+                                        <NavigationMenuLink className="text-1xl px-4 py-2 rounded-md font-semibold hover:bg-slate-100">Movimentações</NavigationMenuLink>
+                                    </Link>
                                 </NavigationMenuItem>
                             </NavigationMenuList>
                         </NavigationMenu>
