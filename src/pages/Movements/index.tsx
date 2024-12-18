@@ -3,6 +3,16 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@C
 import { Button } from "@Components/ui/button";
 import { BiBox, BiLogInCircle, BiLogOutCircle, BiMap, BiSolidAdjust } from "react-icons/bi";
 
+const obj = {
+    Type: 'adjustment',
+    ProductName: "sabão",
+    LocationName: "rua dom joãó",
+    Quantity: 12,
+    State: 'BH',
+}
+
+
+
 export function Movements() {
     return (
         <div> 
@@ -162,7 +172,7 @@ export function Movements() {
                             </div>
                         </AccordionContent>
                     </AccordionItem>
-                    <MovementAccordion />
+                    <MovementAccordion LocationName={obj.LocationName} ProductName={obj.ProductName} Quantity={obj.Quantity} State={obj.State} Type="entry" />
                 </Accordion>
             </div>
         </div>
