@@ -1,9 +1,12 @@
+import { Movement } from "@Types/Movement";
 import { AccordionContent, AccordionItem, AccordionTrigger } from "@Components/ui/accordion";
-import { ReactNode } from "react";
+import React from "react";
 import { BiBox, BiLogInCircle, BiMap, BiLogOutCircle, BiSolidAdjust } from "react-icons/bi";
+import { RiQuestionLine } from "react-icons/ri";
+import { IconBaseProps } from "react-icons";
 
 interface MovementAccordionProps {
-    Movement:string
+    Movement:Movement
 }
 interface MovementAccordionFakeProps {
     Type: "entry" | "output" | "adjustment"
@@ -13,51 +16,51 @@ interface MovementAccordionFakeProps {
     State: string
 }//definir o alias
 
-export function MovementAccordion({Type, LocationName, ProductName, Quantity, State}:MovementAccordionFakeProps) {
+export function MovementAccordion({Type, LocationName, ProductName, Quantity, State, ...Props}:MovementAccordionFakeProps) {
 
-    function DefineMovimentIcon(Type:string) :[ReactNode, ReactNode, string] {
+    function DefineMovimentIcon(Type:string) :[React.ComponentType<IconBaseProps>, string] {
         switch (Type) {
             case 'entry':
                 return [
-                    <BiLogInCircle className="text-sky-900 leading-4" size="1.25rem" />,
-                    <BiLogInCircle className="flex-1 w-[40%] max-w-20 text-sky-900" />,
+                    BiLogInCircle,
                     'Entrada'
                 ]
                 break;
         
             case 'output':
                 return [
-                    <BiLogOutCircle className="text-sky-900 leading-4 rotate-180" size="1.25rem" />,
-                    <BiLogOutCircle className="flex-1 w-[40%] max-w-20 text-sky-900 rotate-180" />,
+                    BiLogOutCircle,
                     'Saída'
                 ]
                 break;
         
             case 'adjustment':
                 return [
-                    <BiSolidAdjust className="text-sky-900 leading-4" size="1.25rem" />,
-                    <BiSolidAdjust className="flex-1 w-[40%] max-w-20 text-sky-900" />,
+                    BiSolidAdjust,
                     'Ajuste'
                 ]
                 break;
         
             default:
                 return [
-                    <BiSolidAdjust className="text-sky-900 leading-4" size="1.25rem" />,
-                    <BiSolidAdjust className="flex-1 w-[40%] max-w-20 text-sky-900" />,
+                    RiQuestionLine,
                     'Desconhecido'
                 ]
                 break;
         }
     }
+    // <BiLogOutCircle className="text-sky-900 leading-4 rotate-180" size="1.5rem" />,
+    // <BiLogOutCircle className="flex-1 w-[40%] max-w-20 text-sky-900 rotate-180" />,
 
-    let [MovimentHeaderIcon, MovementDetailsIcon, MovementType] = DefineMovimentIcon(Type)
+    // procurar uns icones que não tenham que rodar
+
+    const [MovimentIcon, MovementType] = DefineMovimentIcon(Type)
 
     return(
-        <AccordionItem value="4" className="bg-slate-300 rounded-lg">
+        <AccordionItem value="4" className="bg-slate-300 rounded-lg" {...Props}>
             <AccordionTrigger>
                 <div className="flex items-center font-semibold gap-4 text-base">
-                    <span>#12</span> {ProductName} {MovimentHeaderIcon} {LocationName}
+                    <span>#12</span> {ProductName} <MovimentIcon className="text-sky-900 leading-4 rotate-180" size="1.5rem" /> {LocationName}
                 </div>
             </AccordionTrigger>
             <AccordionContent>
@@ -95,7 +98,7 @@ export function MovementAccordion({Type, LocationName, ProductName, Quantity, St
                     </div>
                     <div className="bg-black p-[0.5px] mx-1 rounded-sm" />
                     <div className="flex flex-col items-center justify-between w-full">
-                        {MovementDetailsIcon}
+                        <MovimentIcon className="flex-1 w-[40%] max-w-20 text-sky-900 rotate-180" />
                         <div className="text-center">
                             <p>Tipo de movimentação</p>
                             <p className="text-lg font-semibold">{MovementType}</p>

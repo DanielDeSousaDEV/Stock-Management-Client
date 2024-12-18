@@ -11,8 +11,6 @@ const obj = {
     State: 'BH',
 }
 
-
-
 export function Movements() {
     return (
         <div> 
@@ -172,7 +170,7 @@ export function Movements() {
                             </div>
                         </AccordionContent>
                     </AccordionItem>
-                    <MovementAccordion LocationName={obj.LocationName} ProductName={obj.ProductName} Quantity={obj.Quantity} State={obj.State} Type="entry" />
+                    <MovementAccordion LocationName={obj.LocationName} ProductName={obj.ProductName} Quantity={obj.Quantity} State={obj.State} Type="adp" />
                 </Accordion>
             </div>
         </div>
