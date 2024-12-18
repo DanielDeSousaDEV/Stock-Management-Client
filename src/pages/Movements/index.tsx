@@ -1,7 +1,7 @@
+import { MovementAccordion } from "@Components/MovementAccordion";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@Components/ui/accordion";
 import { Button } from "@Components/ui/button";
 import { BiBox, BiLogInCircle, BiLogOutCircle, BiMap, BiSolidAdjust } from "react-icons/bi";
-import { MdOutlineInput, MdOutlineOutput } from "react-icons/md";
 
 export function Movements() {
     return (
@@ -162,6 +162,7 @@ export function Movements() {
                             </div>
                         </AccordionContent>
                     </AccordionItem>
+                    <MovementAccordion />
                 </Accordion>
             </div>
         </div>
