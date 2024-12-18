@@ -31,7 +31,7 @@ export function HomeLayout() {
                     </nav>
                 </header>
                 
-                <main className="bg-slate-200 flex flex-col items-center justify-center flex-wrap h-40 my-4 rounded-lg">
+                <main className="bg-slate-200 my-4 p-2 rounded-lg">
                     <Outlet />
                 </main>
             </div>
