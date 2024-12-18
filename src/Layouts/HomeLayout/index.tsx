@@ -12,17 +12,17 @@ export function HomeLayout() {
                         <NavigationMenu>
                             <NavigationMenuList>
                                 <NavigationMenuItem>
-                                    <Link to=''>
+                                    <Link to='/Products'>
                                         <NavigationMenuLink className="text-1xl px-4 py-2 rounded-md font-semibold hover:bg-slate-100">Produtos</NavigationMenuLink>
                                     </Link>
                                 </NavigationMenuItem>
                                 <NavigationMenuItem>
-                                    <Link to=''>
+                                    <Link to='/Locations'>
                                         <NavigationMenuLink className="text-1xl px-4 py-2 rounded-md font-semibold hover:bg-slate-100">Localizações</NavigationMenuLink>
                                     </Link>
                                 </NavigationMenuItem>
                                 <NavigationMenuItem>
-                                    <Link to=''>
+                                    <Link to='/'>
                                         <NavigationMenuLink className="text-1xl px-4 py-2 rounded-md font-semibold hover:bg-slate-100">Movimentações</NavigationMenuLink>
                                     </Link>
                                 </NavigationMenuItem>
