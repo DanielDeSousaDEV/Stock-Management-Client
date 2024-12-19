@@ -2,13 +2,15 @@ import { Movement } from "@Types/Movement";
 import { AccordionContent, AccordionItem, AccordionTrigger } from "@Components/ui/accordion";
 import React from "react";
 import { BiBox, BiLogInCircle, BiMap, BiLogOutCircle, BiSolidAdjust } from "react-icons/bi";
-import { RiQuestionLine } from "react-icons/ri";
+import { RiLoginCircleLine, RiLogoutCircleLine, RiLogoutCircleRLine, RiQuestionLine } from "react-icons/ri";
 import { IconBaseProps } from "react-icons";
+import { LiaPeriscope } from "react-icons/lia";
 
 interface MovementAccordionProps {
     Movement:Movement
 }
 interface MovementAccordionFakeProps {
+    id: string
     Type: "entry" | "output" | "adjustment"
     ProductName: string
     LocationName: string
@@ -16,20 +18,20 @@ interface MovementAccordionFakeProps {
     State: string
 }//definir o alias
 
-export function MovementAccordion({Type, LocationName, ProductName, Quantity, State, ...Props}:MovementAccordionFakeProps) {
+export function MovementAccordion({id, Type, LocationName, ProductName, Quantity, State, ...Props}:MovementAccordionFakeProps) {
 
     function DefineMovimentIcon(Type:string) :[React.ComponentType<IconBaseProps>, string] {
         switch (Type) {
             case 'entry':
                 return [
-                    BiLogInCircle,
+                    RiLoginCircleLine,
                     'Entrada'
                 ]
                 break;
         
             case 'output':
                 return [
-                    BiLogOutCircle,
+                    RiLogoutCircleRLine,
                     'Saída'
                 ]
                 break;
@@ -57,10 +59,10 @@ export function MovementAccordion({Type, LocationName, ProductName, Quantity, St
     const [MovimentIcon, MovementType] = DefineMovimentIcon(Type)
 
     return(
-        <AccordionItem value="4" className="bg-slate-300 rounded-lg" {...Props}>
+        <AccordionItem value={id} className="bg-slate-300 rounded-lg" {...Props}>
             <AccordionTrigger>
                 <div className="flex items-center font-semibold gap-4 text-base">
-                    <span>#12</span> {ProductName} <MovimentIcon className="text-sky-900 leading-4 rotate-180" size="1.5rem" /> {LocationName}
+                    <span>#{id}</span> {ProductName} <MovimentIcon className="text-sky-900 leading-4" size="1.5rem" /> {LocationName}
                 </div>
             </AccordionTrigger>
             <AccordionContent>
@@ -98,7 +100,7 @@ export function MovementAccordion({Type, LocationName, ProductName, Quantity, St
                     </div>
                     <div className="bg-black p-[0.5px] mx-1 rounded-sm" />
                     <div className="flex flex-col items-center justify-between w-full">
-                        <MovimentIcon className="flex-1 w-[40%] max-w-20 text-sky-900 rotate-180" />
+                        <MovimentIcon className="flex-1 w-[40%] max-w-20 text-sky-900" />
                         <div className="text-center">
                             <p>Tipo de movimentação</p>
                             <p className="text-lg font-semibold">{MovementType}</p>

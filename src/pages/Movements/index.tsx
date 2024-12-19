@@ -6,7 +6,7 @@ import { BiBox, BiLogInCircle, BiLogOutCircle, BiMap, BiSolidAdjust } from "reac
 const obj = {
     Type: 'adjustment',
     ProductName: "sabão",
-    LocationName: "rua dom joãó",
+    LocationName: "rua dom joão",
     Quantity: 12,
     State: 'BH',
 }
@@ -20,7 +20,7 @@ export function Movements() {
             </div>
             <div>
                 <Accordion type="multiple">
-                    <AccordionItem value="1" className="bg-slate-300 rounded-lg">
+                    {/* <AccordionItem value="1" className="bg-slate-300 rounded-lg">
                         <AccordionTrigger>
                             <div className="flex items-center font-semibold gap-4 text-base">
                                 <span>#12</span> Cotonetes <BiLogInCircle className="text-sky-900 leading-4" size="1.25rem"/> Irmã Alzira
@@ -169,8 +169,11 @@ export function Movements() {
                                 </div>
                             </div>
                         </AccordionContent>
-                    </AccordionItem>
-                    <MovementAccordion LocationName={obj.LocationName} ProductName={obj.ProductName} Quantity={obj.Quantity} State={obj.State} Type="adp" />
+                    </AccordionItem> */}
+                    <MovementAccordion id="12" LocationName={obj.LocationName} ProductName={obj.ProductName} Quantity={obj.Quantity} State={obj.State} Type="entry" />
+                    <MovementAccordion id="13" LocationName={obj.LocationName} ProductName={obj.ProductName} Quantity={obj.Quantity} State={obj.State} Type="output" />
+                    <MovementAccordion id="14" LocationName={obj.LocationName} ProductName={obj.ProductName} Quantity={obj.Quantity} State={obj.State} Type="adjustment" />
+                    <MovementAccordion id="15" LocationName={obj.LocationName} ProductName={obj.ProductName} Quantity={obj.Quantity} State={obj.State} Type="ado" />
                 </Accordion>
             </div>
         </div>
