@@ -1,8 +1,26 @@
-"use client"
 import { z } from 'zod'
 
 export const createMovementSchema = z.object({
     product: z.string({
         required_error: 'Por favor selecione um produto'
-    })
+    }),
+    localization: z.string({
+        required_error: 'Por favor selecione uma localização'
+    }),
+    quantity: z.preprocess((value)=>{
+        return parseInt(value as string)
+    },z.number({
+        required_error: 'Por favor informe a quantidade',
+        message: 'Por favor digite um número'
+    }).int({
+        message: 'Digite um valor inteiro'
+    })),
+    movementType: z.enum([
+        'entry',
+        'output',
+        'adjustment'
+    ], {
+        message: 'Por favor selecione um valor valido'
+    }),
+    description: z.string().max(120, 'A descrição deve ter menos que 120 caracteres').nullable()
 })

@@ -1,10 +1,9 @@
 import { Movement } from "@Types/Movement";
 import { AccordionContent, AccordionItem, AccordionTrigger } from "@Components/ui/accordion";
 import React from "react";
-import { BiBox, BiLogInCircle, BiMap, BiLogOutCircle, BiSolidAdjust } from "react-icons/bi";
-import { RiLoginCircleLine, RiLogoutCircleLine, RiLogoutCircleRLine, RiQuestionLine } from "react-icons/ri";
+import { BiBox, BiMap, BiSolidAdjust } from "react-icons/bi";
+import { RiLoginCircleLine, RiLogoutCircleRLine, RiQuestionLine } from "react-icons/ri";
 import { IconBaseProps } from "react-icons";
-import { LiaPeriscope } from "react-icons/lia";
 
 interface MovementAccordionProps {
     Movement:Movement
