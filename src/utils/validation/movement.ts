@@ -8,11 +8,11 @@ export const createMovementSchema = z.object({
         required_error: 'Por favor selecione uma localização'
     }),
     quantity: z.preprocess((value)=>{
-        return parseInt(value as string)
+        return parseFloat(value as string)
     },z.number({
         required_error: 'Por favor informe a quantidade',
         message: 'Por favor digite um número'
-    }).int({
+    }).positive({
         message: 'Digite um valor inteiro'
     })),
     movementType: z.enum([
@@ -22,5 +22,5 @@ export const createMovementSchema = z.object({
     ], {
         message: 'Por favor selecione um valor valido'
     }),
-    description: z.string().max(120, 'A descrição deve ter menos que 120 caracteres').nullable()
+    description: z.string().max(120, 'A descrição deve ter menos que 120 caracteres').optional()
 })

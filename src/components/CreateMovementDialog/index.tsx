@@ -1,14 +1,14 @@
-import { Dialog, DialogClose, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@Components/ui/dialog";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { DialogProps } from "@radix-ui/react-dialog";
 import { useForm } from "react-hook-form";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@Components/ui/form";
 import { Input } from "@Components/ui/input";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { createMovementSchema } from "@Utils/validation/movement";
 import { Button } from "@Components/ui/button";
+import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@Components/ui/dialog";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@Components/ui/select";
 import { Textarea } from "@Components/ui/textarea";
+import { createMovementSchema } from "@Utils/validation/movement";
     
 
 export function CreateMovementDialog ({...Props}: DialogProps) {
@@ -30,7 +30,7 @@ export function CreateMovementDialog ({...Props}: DialogProps) {
 
     return (
         <Dialog {...Props}>
-            <DialogContent>
+            <DialogContent className="lg:max-w-4xl">
                 <DialogHeader>
                     <DialogTitle>Criar uma Movimentação</DialogTitle>
                     <DialogDescription>Preença os dados abaixo:</DialogDescription>
@@ -44,7 +44,7 @@ export function CreateMovementDialog ({...Props}: DialogProps) {
                                             name="product"
                                             render={({field})=>(
                                                 <FormItem>
-                                                    <FormLabel>Produto</FormLabel>
+                                                    <FormLabel>Produto<span className="text-red-400">*</span>:</FormLabel>
                                                         <Select onValueChange={field.onChange} defaultValue={field.value}>
                                                             <FormControl>
                                                                 <SelectTrigger>
@@ -72,7 +72,7 @@ export function CreateMovementDialog ({...Props}: DialogProps) {
                                             name="localization"
                                             render={({field})=>(
                                                 <FormItem>
-                                                    <FormLabel>Localização</FormLabel>
+                                                    <FormLabel>Localização<span className="text-red-400">*</span>:</FormLabel>
                                                         <Select onValueChange={field.onChange} defaultValue={field.value}>
                                                             <FormControl>
                                                                 <SelectTrigger>
@@ -100,7 +100,7 @@ export function CreateMovementDialog ({...Props}: DialogProps) {
                                             name="quantity"
                                             render={({field})=>(
                                                 <FormItem>
-                                                    <FormLabel>Quantidade</FormLabel>
+                                                    <FormLabel>Quantidade<span className="text-red-400">*</span>:</FormLabel>
                                                         <Input type="number" {...field}/>
                                                     <FormMessage />
                                                 </FormItem>
@@ -111,7 +111,7 @@ export function CreateMovementDialog ({...Props}: DialogProps) {
                                             name="movementType"
                                             render={({field})=>(
                                                 <FormItem>
-                                                    <FormLabel>Localização</FormLabel>
+                                                    <FormLabel>Localização<span className="text-red-400">*</span>:</FormLabel>
                                                         <Select onValueChange={field.onChange} defaultValue={field.value}>
                                                             <FormControl>
                                                                 <SelectTrigger>
@@ -135,13 +135,13 @@ export function CreateMovementDialog ({...Props}: DialogProps) {
                                             )}
                                         />
                                 </div>
-                                <div>
+                                <div className="mb-2">
                                     <FormField
                                         control={form.control}
                                         name="description"
-                                        render={(field)=>(
+                                        render={({field})=>(
                                             <FormItem>
-                                                <FormLabel>Descrição</FormLabel>
+                                                <FormLabel>Descrição:</FormLabel>
                                                 <FormControl>
                                                     <Textarea {...field}/>
                                                 </FormControl>
@@ -151,16 +151,19 @@ export function CreateMovementDialog ({...Props}: DialogProps) {
                                         )}
                                     />
                                 </div>
-                                <div className="flex justify-end gap-2">
-                                    <DialogClose>
-                                        <Button variant="destructive">
-                                            Cancelar
+
+                                <DialogFooter>
+                                    <div className="flex justify-end gap-2">
+                                        <DialogClose>
+                                            <Button variant="destructive">
+                                                Cancelar
+                                            </Button>
+                                        </DialogClose>
+                                        <Button type="submit">
+                                            Criar Movimentação
                                         </Button>
-                                    </DialogClose>
-                                    <Button onClick={logger}>
-                                        Criar
-                                    </Button>
-                                </div>
+                                    </div>
+                                </DialogFooter>
                             </form>
                         </Form>
                     </div>
