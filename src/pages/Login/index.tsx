@@ -4,10 +4,12 @@ import { Input } from "@Components/ui/input";
 import { loginSchema } from "@Utils/validation/login";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { z } from "zod";
 
 export function Login() {
+    const navigate = useNavigate()
+
     const form = useForm<z.infer<typeof loginSchema>>({
         resolver: zodResolver(loginSchema),
         defaultValues: {
@@ -19,6 +21,9 @@ export function Login() {
     function onSubmit(data: z.infer<typeof loginSchema>) {
         console.log('deu certo');
         console.log(data);
+        setTimeout(()=>{
+            navigate('/')
+        }, 3000)
     }
 
     function logger() {
