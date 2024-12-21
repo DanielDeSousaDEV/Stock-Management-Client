@@ -4,12 +4,13 @@ import { Locations } from "@/pages/Locations";
 import { Movements } from "@/pages/Movements";
 import { Products } from "@/pages/Products";
 import { Routes, Route } from "react-router";
+import { Login } from "@/pages/Login";
 
 export function MyRoutes() {
     return (
         <Routes>
             <Route path="/Login" element={<LoginLayout />}>
-                <Route index />
+                <Route index element={<Login />}/>
                 <Route path="SignUp" />
             </Route>
 
