@@ -1,22 +1,22 @@
-import { Button } from "@/components/ui/button";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { LoginSchema } from "@/utils/validation/login";
+import { Button } from "@Components/ui/button";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@Components/ui/form";
+import { Input } from "@Components/ui/input";
+import { loginSchema } from "@Utils/validation/login";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router";
 import { z } from "zod";
 
 export function Login() {
-    const form = useForm<z.infer<typeof LoginSchema>>({
-        resolver: zodResolver(LoginSchema),
+    const form = useForm<z.infer<typeof loginSchema>>({
+        resolver: zodResolver(loginSchema),
         defaultValues: {
             email: '',
             password: ''
         }
     })
 
-    function onSubmit(data: z.infer<typeof LoginSchema>) {
+    function onSubmit(data: z.infer<typeof loginSchema>) {
         console.log('deu certo');
         console.log(data);
     }
@@ -63,7 +63,7 @@ export function Login() {
                     <p className="text-center text-sm leading-none">
                         Não Possui uma conta!
                         <Link to="/SignUp">
-                            <p className="text-indigo-900 hover:underline">
+                            <p className="text-blue-800 hover:underline">
                                 Cadastre-se
                             </p>
                         </Link>
