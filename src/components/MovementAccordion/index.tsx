@@ -50,11 +50,7 @@ export function MovementAccordion({id, Type, LocationName, ProductName, Quantity
                 break;
         }
     }
-    // <BiLogOutCircle className="text-sky-900 leading-4 rotate-180" size="1.5rem" />,
-    // <BiLogOutCircle className="flex-1 w-[40%] max-w-20 text-sky-900 rotate-180" />,
-
-    // procurar uns icones que não tenham que rodar
-
+    
     const [MovimentIcon, MovementType] = DefineMovimentIcon(Type)
 
     return(
