@@ -15,7 +15,7 @@ interface MovementAccordionFakeProps {
     LocationName: string
     Quantity: number
     State: string
-}//definir o alias
+}
 
 export function MovementAccordion({id, Type, LocationName, ProductName, Quantity, State, ...Props}:MovementAccordionFakeProps) {
 

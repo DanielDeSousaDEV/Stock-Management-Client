@@ -4,6 +4,9 @@ import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import { RiAddLine } from "react-icons/ri";
 import { IoEllipsisHorizontal } from "react-icons/io5";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { BiSolidPencil, BiSolidTrashAlt } from "react-icons/bi";
+import { CategoryListItem } from "@/components/CategoryListItem";
 
 export function Products() {
     const { toast } = useToast()
@@ -27,20 +30,9 @@ export function Products() {
                     <Button className="flex-shrink-0" title="Adicionar uma categoria" size="icon" onClick={logger}><RiAddLine /></Button>
                 </div>
                 <div className="space-y-1">
-                    <div className="flex items-center justify-between p-2 bg-slate-300 min-h-10 rounded-lg">
-                        <div className="flex items-center gap-2">
-                            <Checkbox id="limpeza"/>
-                            <label htmlFor="limpeza">Limpeza</label>
-                        </div>
-                        <Button className="h-6 w-6" variant="ghost"><IoEllipsisHorizontal /></Button>
-                    </div>
-                    <div className="flex items-center justify-between p-2 bg-slate-300 min-h-10 rounded-lg">
-                        <div className="flex items-center gap-2">
-                            <Checkbox id="comida"/>
-                            <label htmlFor="comida">Comida</label>
-                        </div>
-                        <Button className="h-6 w-6" variant="ghost"><IoEllipsisHorizontal /></Button>
-                    </div>
+                    <CategoryListItem id={23} name="cozinha"/>
+                    <CategoryListItem id={23} name="cozinha"/>
+                    <CategoryListItem id={23} name="cozinha"/>
                 </div>
             </div>
 
