@@ -30,7 +30,7 @@ export function CreateMovementDialog ({...Props}: DialogProps) {
 
     return (
         <Dialog {...Props}>
-            <DialogContent className="lg:max-w-4xl">
+            <DialogContent>
                 <DialogHeader>
                     <DialogTitle>Criar uma Movimentação</DialogTitle>
                     <DialogDescription>Preença os dados abaixo:</DialogDescription>

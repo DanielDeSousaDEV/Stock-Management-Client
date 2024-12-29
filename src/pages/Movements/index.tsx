@@ -34,7 +34,7 @@ export function Movements() {
                     <MovementAccordion id="12" LocationName={obj.LocationName} ProductName={obj.ProductName} Quantity={obj.Quantity} State={obj.State} Type="entry" />
                     <MovementAccordion id="13" LocationName={obj.LocationName} ProductName={obj.ProductName} Quantity={obj.Quantity} State={obj.State} Type="output" />
                     <MovementAccordion id="14" LocationName={obj.LocationName} ProductName={obj.ProductName} Quantity={obj.Quantity} State={obj.State} Type="adjustment" />
-                    <MovementAccordion id="15" LocationName={obj.LocationName} ProductName={obj.ProductName} Quantity={obj.Quantity} State={obj.State} Type="ado" />
+                    <MovementAccordion id="15" LocationName={obj.LocationName} ProductName={obj.ProductName} Quantity={obj.Quantity} State={obj.State} Type="entry" />
                 </Accordion>
             </div>
 
