@@ -1,12 +1,9 @@
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import { RiAddLine } from "react-icons/ri";
-import { IoEllipsisHorizontal } from "react-icons/io5";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { BiSolidPencil, BiSolidTrashAlt } from "react-icons/bi";
 import { CategoryListItem } from "@/components/CategoryListItem";
+import { ProductCard } from "@/components/ProductCard";
 
 export function Products() {
     const { toast } = useToast()
@@ -36,8 +33,20 @@ export function Products() {
                 </div>
             </div>
 
-            <div className="mb-4 col-span-2 bg-slate-200 rounded-lg p-2">
-                <h3 className="text-lg font-semibold">Produtos</h3>
+            <div className="col-span-2 bg-slate-200 rounded-lg p-2">
+                <div className="mb-4">
+                    <h3 className="text-lg font-semibold">Produtos</h3>
+                </div>
+                <div className="flex w-full items-center gap-2 mb-2">
+                    <Input className="bg-slate-50 flex-1"/>
+                    <Button className="flex-shrink-0" title="Adicionar uma categoria" size="icon" onClick={logger}><RiAddLine /></Button>
+                </div>
+                <div className="grid grid-cols-2 gap-1">
+                    <ProductCard category="Higiene" minQuantity={200} name="Cotonete" price={20} quantity={900} />
+                    <ProductCard category="Militar" minQuantity={200} name="Casapete" price={20} quantity={100} imgURL="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrQbDu8r2APmKlXic6yzmrQRcMJSZDTOF74Q&s" />
+                    <ProductCard category="Magica" minQuantity={200} name="Cajado" price={20} quantity={150} imgURL="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFcrzGE4ixAsMrlGNXU73Xcspq1mzzpROnuA&s" />
+                    <ProductCard category="Medicina" minQuantity={200} name="Agulha" price={20} quantity={100} />
+                </div>
             </div>
         </div>
     )
