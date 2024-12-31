@@ -39,8 +39,8 @@ export function Products() {
                 </div>
                 <div className="space-y-1">
                     <CategoryListItem id={23} name="cozinha"/>
-                    <CategoryListItem id={23} name="cozinha"/>
-                    <CategoryListItem id={23} name="cozinha"/>
+                    <CategoryListItem id={22} name="cozinha"/>
+                    <CategoryListItem id={24} name="cozinha"/>
                 </div>
             </div>
 
