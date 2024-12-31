@@ -6,9 +6,11 @@ const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/web
 export const createProductSchema = z.object({
     name: z.string({required_error: 'Por favor informe o nome do produto'})
         .min(2, {message: 'O nome do produto deve possui no minimo dois caracteres'}),
-    image: z.any({required_error: 'Por favor envie uma imagem demostrativa do produto'})
+    image: z.any()
         .refine((file: File) => {
-            return file?.size > MAX_FILE_SIZE
+            console.log(file);
+            
+            return file?.size > MAX_FILE_SIZE //ta dando erro aqui
         }, 'A imagem deve ser menor que 8MB')
         .refine((file: File) => {
             return ACCEPTED_IMAGE_TYPES.includes(file?.type)
@@ -18,7 +20,7 @@ export const createProductSchema = z.object({
             required_error: 'Por favor informe o preço unitario do produto',
             message: 'Por favor digite um número'
         })
-        .positive({message: 'Digite um valor inteiro'})
+        .positive({message: 'Digite um valor positivo'})
         .int({message: 'Por favor digite um valor inteiro'})),
     description: z.string()
         .max(120, {message: 'A descrição deve ter menos que 120 caracteres'})
