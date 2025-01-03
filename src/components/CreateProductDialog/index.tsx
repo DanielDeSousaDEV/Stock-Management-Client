@@ -124,7 +124,10 @@ export function CreateProductDialog({...Props}:DialogProps) {
                                                     <Input 
                                                         type="file" 
                                                         {...rest}
-                                                        onChange={(e) => form.setValue("image", e.target.files as FileList)}
+                                                        onChange={(e) => {
+                                                            form.clearErrors('image')
+                                                            form.setValue("image", e.target.files as FileList)
+                                                        }}
                                                     />
                                                 </FormControl>
                                                 <FormMessage />

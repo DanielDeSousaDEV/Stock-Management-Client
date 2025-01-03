@@ -59,7 +59,7 @@ export function CreateCategoryDialog ({...Props}: DialogProps) {
                                     name="description"
                                     render={({field})=>(
                                         <FormItem>
-                                            <FormLabel>Descrição<span className="text-red-400">*</span>:</FormLabel>
+                                            <FormLabel>Descrição:</FormLabel>
                                             <FormControl>
                                                 <Textarea rows={5} className="resize-none" {...field}/>
                                             </FormControl>
@@ -91,6 +91,7 @@ export function CreateCategoryDialog ({...Props}: DialogProps) {
                                                     ]}
                                                     color={field.value}
                                                     onChange={(color)=>{
+                                                        form.clearErrors('color_hex')
                                                         form.setValue('color_hex', color.hex)
                                                     }}
                                                 />
