@@ -2,12 +2,18 @@ import { DialogProps } from "@radix-ui/react-dialog";
 import { Button } from "../ui/button";
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "../ui/dialog";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createProductSchema } from "@/utils/validation/product";
 import { z } from "zod";
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
+
+
+/**
+ * Quantidade consegue ser menor que qtd minima
+ */
 
 export function CreateProductDialog({...Props}:DialogProps) {
     const form = useForm<z.infer<typeof createProductSchema>>({
@@ -71,7 +77,7 @@ export function CreateProductDialog({...Props}:DialogProps) {
                                         <FormItem className="row-span-2">
                                             <FormLabel>Descrição:</FormLabel>
                                             <FormControl>
-                                                <Textarea {...field}/>
+                                                <Textarea className="h-[78%] resize-none" {...field}/>
                                             </FormControl>
                                             <FormMessage />
                                         </FormItem>
@@ -127,12 +133,34 @@ export function CreateProductDialog({...Props}:DialogProps) {
                                         )
                                     }}
                                 />
+
+                                <FormField 
+                                    control={form.control}
+                                    name="category"
+                                    render={({field})=>(
+                                        <FormItem>
+                                            <FormLabel>Categoria<span className="text-red-400">*</span>:</FormLabel>
+                                                <Select onValueChange={field.onChange}>
+                                                    <FormControl>
+                                                        <SelectTrigger>
+                                                            <SelectValue placeholder='Selecione uma categoria'/>
+                                                        </SelectTrigger>
+                                                    </FormControl>
+                                                    <SelectContent>
+                                                        <SelectItem value="1">Aa</SelectItem>
+                                                        <SelectItem value="2">Aa</SelectItem>
+                                                    </SelectContent>
+                                                </Select>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
                                     
                             </div>
                             <DialogFooter>
                                 <div className="flex justify-end gap-2">
                                     <DialogClose>
-                                        <Button variant="destructive">
+                                        <Button type="button" variant="destructive">
                                             Cancelar
                                         </Button>
                                     </DialogClose>
