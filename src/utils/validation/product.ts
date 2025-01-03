@@ -6,14 +6,14 @@ const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/web
 export const createProductSchema = z.object({
     name: z.string({required_error: 'Por favor informe o nome do produto'})
         .min(2, {message: 'O nome do produto deve possui no minimo dois caracteres'}),
-    image: z.any()
-        .refine((file: File) => {
-            console.log(file);
+    image: z.custom<FileList>()
+        .refine((file: FileList) => {
+            console.log(file[0].size < MAX_FILE_SIZE);
             
-            return file?.size > MAX_FILE_SIZE //ta dando erro aqui
+            return file[0]?.size < MAX_FILE_SIZE //ta dando erro aqui
         }, 'A imagem deve ser menor que 8MB')
-        .refine((file: File) => {
-            return ACCEPTED_IMAGE_TYPES.includes(file?.type)
+        .refine((file: FileList) => {
+            return ACCEPTED_IMAGE_TYPES.includes(file[0]?.type)
         }, 'Unicos formatos suportados .jpg, .jpeg, .png e .webp'),
     price: z.preprocess(value=> parseFloat(value as string),
         z.number({

@@ -2,7 +2,7 @@ import { DialogProps } from "@radix-ui/react-dialog";
 import { Button } from "../ui/button";
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "../ui/dialog";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createProductSchema } from "@/utils/validation/product";
 import { z } from "zod";
@@ -109,15 +109,23 @@ export function CreateProductDialog({...Props}:DialogProps) {
                                 <FormField 
                                     control={form.control}
                                     name="image"
-                                    render={({field})=>(
-                                        <FormItem>
-                                            <FormLabel>Imagem<span className="text-red-400">*</span>:</FormLabel>
-                                            <FormControl>
-                                                <Input type="file" {...field}/>
-                                            </FormControl>
-                                            <FormMessage />
-                                        </FormItem>
-                                    )}
+                                    render={({field})=>{
+                                        const {value, ...rest} = field
+
+                                        return (
+                                            <FormItem>
+                                                <FormLabel>Imagem<span className="text-red-400">*</span>:</FormLabel>
+                                                <FormControl>
+                                                    <Input 
+                                                        type="file" 
+                                                        {...rest}
+                                                        onChange={(e) => form.setValue("image", e.target.files as FileList)}
+                                                    />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )
+                                    }}
                                 />
                                     
                             </div>
