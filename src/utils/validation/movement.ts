@@ -9,7 +9,7 @@ export const createMovementSchema = z.object({
             message: 'Por favor digite um número'
         })
         .positive({message: 'Digite um valor inteiro'})),
-    movementType: z.enum([
+    movement_type: z.enum([
         'entry',
         'output',
         'adjustment'

@@ -24,8 +24,7 @@ export function CreateProductDialog({...Props}:DialogProps) {
     })
 
     function onSubmit(data: z.infer<typeof createProductSchema>) {
-        console.log(data);
-        
+        console.log(data);    
     }
 
     return (

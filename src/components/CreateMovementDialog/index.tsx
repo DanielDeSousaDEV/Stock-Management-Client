@@ -108,7 +108,7 @@ export function CreateMovementDialog ({...Props}: DialogProps) {
                                         />
                                         <FormField 
                                             control={form.control}
-                                            name="movementType"
+                                            name="movement_type"
                                             render={({field})=>(
                                                 <FormItem>
                                                     <FormLabel>Localização<span className="text-red-400">*</span>:</FormLabel>
@@ -155,7 +155,7 @@ export function CreateMovementDialog ({...Props}: DialogProps) {
                                 <DialogFooter>
                                     <div className="flex justify-end gap-2">
                                         <DialogClose>
-                                            <Button variant="destructive">
+                                            <Button type="button" variant="destructive">
                                                 Cancelar
                                             </Button>
                                         </DialogClose>
