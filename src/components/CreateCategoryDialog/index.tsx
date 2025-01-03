@@ -35,7 +35,7 @@ export function CreateCategoryDialog ({...Props}: DialogProps) {
             <DialogContent>
                 <DialogHeader>
                     <DialogTitle>Criar uma Categoria</DialogTitle>
-                    <DialogDescription>Preença os dados abaixo:</DialogDescription>
+                    <DialogDescription>Preencha os dados abaixo:</DialogDescription>
                 </DialogHeader>
                     <Form {...form}>
                         <form onSubmit={form.handleSubmit(onSubmit)}>

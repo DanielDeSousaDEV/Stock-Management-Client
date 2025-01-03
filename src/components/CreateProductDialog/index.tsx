@@ -35,7 +35,7 @@ export function CreateProductDialog({...Props}:DialogProps) {
                         Criar um Produto
                     </DialogTitle>
                     <DialogDescription>
-                        Preença os dados abaixo:
+                        Preencha os dados abaixo:
                     </DialogDescription>
                 </DialogHeader>
                     <Form {...form}>

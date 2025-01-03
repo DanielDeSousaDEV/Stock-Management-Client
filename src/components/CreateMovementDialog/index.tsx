@@ -33,7 +33,7 @@ export function CreateMovementDialog ({...Props}: DialogProps) {
             <DialogContent>
                 <DialogHeader>
                     <DialogTitle>Criar uma Movimentação</DialogTitle>
-                    <DialogDescription>Preença os dados abaixo:</DialogDescription>
+                    <DialogDescription>Preencha os dados abaixo:</DialogDescription>
                 </DialogHeader>
                     <div>
                         <Form {...form}>
