@@ -1,6 +1,5 @@
-import { Toast } from "@/components/ui/toast";
 import { Toaster } from "@/components/ui/toaster";
-import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger } from "@Components/ui/navigation-menu";
+import { NavigationMenu, NavigationMenuItem, NavigationMenuLink, NavigationMenuList } from "@Components/ui/navigation-menu";
 import { Link, Outlet } from "react-router";
 
 export function HomeLayout() {
@@ -34,8 +33,6 @@ export function HomeLayout() {
                         </nav>
                     </div>
                 </header>
-
-
                 
                 <main className="bg-slate-100 my-4 container mx-auto p-2 rounded-lg">
                     <Outlet />
