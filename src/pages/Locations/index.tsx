@@ -1,4 +1,5 @@
 import { LocationCard } from "@/components/LocationCard";
+import { LocationDetailsDialog } from "@/components/LocationDetailsDialog";
 import { Location } from "@/types/Location";
 
 const locations: Location[] = [
@@ -137,6 +138,8 @@ export function Locations() {
                     <LocationCard Location={location}/>
                 ))}
             </div>
+
+            <LocationDetailsDialog />
         </div>
     )
 }
