@@ -1,6 +1,8 @@
 import { LocationCard } from "@/components/LocationCard";
 import { LocationDetailsDialog } from "@/components/LocationDetailsDialog";
+import { Button } from "@/components/ui/button";
 import { Location } from "@/types/Location";
+import { useState } from "react";
 
 const locations: Location[] = [
     {
@@ -126,11 +128,20 @@ const locations: Location[] = [
 ];
 
 export function Locations() {
+    const [isLocationDetailsDialogOpen, setIsLocationDetailsDialogOpen] = useState<boolean>(false)
+    
+    const openLocationDetailsDialog = () => {
+        setIsLocationDetailsDialogOpen(true)
+    }
+    const closeLocationDetailsDialog = () => {
+        setIsLocationDetailsDialogOpen(false)
+    }
+
     return (
         <div>
             <div className="flex items-center justify-between mb-4">
                 <h3 className="text-lg font-semibold capitalize">Localizações</h3>
-                {/* <Button onClick={openCreateMovementDialog}>Fazer uma Movimentação</Button> */}
+                <Button onClick={openLocationDetailsDialog}>Fazer uma Movimentação</Button>
             </div>
 
             <div className="grid grid-cols-4 gap-1">
@@ -139,7 +150,7 @@ export function Locations() {
                 ))}
             </div>
 
-            <LocationDetailsDialog />
+            <LocationDetailsDialog open={isLocationDetailsDialogOpen} onOpenChange={setIsLocationDetailsDialogOpen}/>
         </div>
     )
 }

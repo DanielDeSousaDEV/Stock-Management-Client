@@ -138,10 +138,10 @@ export function CreateMovementDialog ({...Props}: DialogProps) {
                                 <div className="mb-2">
                                     <FormField
                                         control={form.control}
-                                        name="description"
+                                        name="reason"
                                         render={({field})=>(
                                             <FormItem>
-                                                <FormLabel>Descrição:</FormLabel>
+                                                <FormLabel>Razão:</FormLabel>
                                                 <FormControl>
                                                     <Textarea {...field}/>
                                                 </FormControl>

@@ -14,7 +14,7 @@ export const createMovementSchema = z.object({
         'output',
         'adjustment'
     ], {message: 'Por favor selecione um valor valido'}),
-    description: z.string()
+    reason: z.string()
         .max(120, {message: 'A descrição deve ter menos que 120 caracteres'})
         .optional()
 })

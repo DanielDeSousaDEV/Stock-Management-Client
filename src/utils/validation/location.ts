@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const createLocationchema = z.object({
+export const createLocationSchema = z.object({
     name: z.string({required_error: 'Por favor informe o nome da localização'})
         .min(2, {message: 'O nome da localização deve possuir mais que 2 letras'}),
     description: z.string()
