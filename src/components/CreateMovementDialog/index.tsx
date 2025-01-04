@@ -69,7 +69,7 @@ export function CreateMovementDialog ({...Props}: DialogProps) {
                                         />
                                         <FormField 
                                             control={form.control}
-                                            name="localization"
+                                            name="location"
                                             render={({field})=>(
                                                 <FormItem>
                                                     <FormLabel>Localização<span className="text-red-400">*</span>:</FormLabel>

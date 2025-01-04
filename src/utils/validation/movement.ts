@@ -2,7 +2,7 @@ import { z } from 'zod'
 
 export const createMovementSchema = z.object({
     product: z.string({required_error: 'Por favor selecione um produto'}),
-    localization: z.string({required_error: 'Por favor selecione uma localização'}),
+    location: z.string({required_error: 'Por favor selecione uma localização'}),
     quantity: z.preprocess(value=> parseFloat(value as string),
         z.number({
             required_error: 'Por favor informe a quantidade',

@@ -9,7 +9,6 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 import { Button } from "../ui/button";
-import { useState } from "react";
 
 export function CreateCategoryDialog ({...Props}: DialogProps) {
     const form = useForm<z.infer<typeof createCategorySchema>>({
@@ -27,7 +26,6 @@ export function CreateCategoryDialog ({...Props}: DialogProps) {
     function logger() {
         console.log(form.getValues());
         console.log(form.getFieldState("name"))
-        
     }
 
     return (

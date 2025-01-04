@@ -25,7 +25,7 @@ export function Movements() {
     return (
         <div> 
             <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-semibold">Movimentações</h3>
+                <h3 className="text-lg font-semibold capitalize">Movimentações</h3>
                 <Button onClick={openCreateMovementDialog}>Fazer uma Movimentação</Button>
             </div>
             

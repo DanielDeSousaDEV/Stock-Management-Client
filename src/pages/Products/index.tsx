@@ -44,7 +44,7 @@ export function Products() {
         <div className="grid grid-cols-3 gap-2"> 
             <div className="col-span-1 bg-slate-200 rounded-lg p-2">
                 <div className="mb-4">
-                    <h3 className="text-lg font-semibold">Categorias</h3>
+                    <h3 className="text-lg font-semibold capitalize">Categorias</h3>
                 </div>
                 <div className="flex w-full items-center gap-2 mb-2">
                     <Input className="bg-slate-50 flex-1"/>
@@ -59,7 +59,7 @@ export function Products() {
 
             <div className="col-span-2 bg-slate-200 rounded-lg p-2">
                 <div className="mb-4">
-                    <h3 className="text-lg font-semibold">Produtos</h3>
+                    <h3 className="text-lg font-semibold capitalize">Produtos</h3>
                 </div>
                 <div className="flex w-full items-center gap-2 mb-2">
                     <Input className="bg-slate-50 flex-1"/>
