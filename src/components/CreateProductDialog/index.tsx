@@ -1,6 +1,6 @@
 import { DialogProps } from "@radix-ui/react-dialog";
 import { Button } from "../ui/button";
-import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "../ui/dialog";
+import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "../ui/dialog";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -19,7 +19,10 @@ export function CreateProductDialog({...Props}:DialogProps) {
     const form = useForm<z.infer<typeof createProductSchema>>({
         resolver: zodResolver(createProductSchema),
         defaultValues: {
-
+            name: '',
+            price: 0,
+            quantity: 0,
+            minimum_quantity: 0,
         }
     })
 
