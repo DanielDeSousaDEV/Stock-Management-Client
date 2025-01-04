@@ -30,7 +30,7 @@ export function Movements() {
             </div>
             
             <div>
-                <Accordion type="multiple">
+                <Accordion type="multiple" className="space-y-1">
                     <MovementAccordion id="12" LocationName={obj.LocationName} ProductName={obj.ProductName} Quantity={obj.Quantity} State={obj.State} Type="entry" />
                     <MovementAccordion id="13" LocationName={obj.LocationName} ProductName={obj.ProductName} Quantity={obj.Quantity} State={obj.State} Type="output" />
                     <MovementAccordion id="14" LocationName={obj.LocationName} ProductName={obj.ProductName} Quantity={obj.Quantity} State={obj.State} Type="adjustment" />

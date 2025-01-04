@@ -54,7 +54,7 @@ export function MovementAccordion({id, Type, LocationName, ProductName, Quantity
     const [MovimentIcon, MovementType] = DefineMovimentIcon(Type)
 
     return(
-        <AccordionItem value={id} className="bg-slate-300 rounded-lg" {...Props}>
+        <AccordionItem value={id} className="bg-slate-200 rounded-lg" {...Props}>
             <AccordionTrigger>
                 <div className="flex items-center font-semibold gap-4 text-base">
                     <span>#{id}</span> {ProductName} <MovimentIcon className="text-sky-900 leading-4" size="1.5rem" /> {LocationName}
