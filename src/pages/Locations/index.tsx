@@ -146,7 +146,7 @@ export function Locations() {
 
             <div className="grid grid-cols-4 gap-1">
                 {locations.map((location)=>(
-                    <LocationCard Location={location}/>
+                    <LocationCard key={location.Id} Location={location}/>
                 ))}
             </div>
 

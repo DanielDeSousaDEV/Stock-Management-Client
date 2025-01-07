@@ -1,31 +1,57 @@
-import { useForm } from "react-hook-form";
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "../ui/dialog";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
 import { Button } from "../ui/button";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { createLocationSchema } from "@/utils/validation/location";
-import { z } from "zod";
-import { toast } from "@/hooks/use-toast";
-import { DialogProps } from "@radix-ui/react-dialog";
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
+import { DialogProps } from "@radix-ui/react-dialog";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { createLocationSchema } from "@/utils/validation/location";
+
+import { useForm } from "react-hook-form";
+import { useMask } from '@react-input/mask';
+import { toast } from "@/hooks/use-toast";
 
 export function LocationDetailsDialog(Props: DialogProps) {
     const form = useForm<z.infer<typeof createLocationSchema>>({
         resolver: zodResolver(createLocationSchema),
         defaultValues: {
-
+            name: '',
+            city: '',
+            CEP: '',
+            neighborhood: '',
+            street_name: '',
+            number: 0
         }
     })
 
+    const refInputCEP = useMask({
+        mask: 'ddddd-ddd',
+        replacement: {
+            d: /[0-9]/
+        }
+    })
+    
+    // const [possibleStates, setPossibleStates] = useState<AxiosResponse>()
+    // useEffect(()=>{
+    //     axios.get('http://servicodados.ibge.gov.br/api/v1/localidades/estados').then((response: AxiosResponse<State[]>)=>{
+    //         console.log(response);
+    //         setPossibleStates(response);
+    //     })
+    // }, [])
+
     function onSubmit (data: z.infer<typeof createLocationSchema>) {
         toast({
-            title: 'deu submit',
-            description: 'oskey',
-            variant: 'primary',
-            content: JSON.stringify(form.getValues(), null, 4)
+            title: 'Deu submit',
+            description: (
+                <pre>
+                    <code>
+                        {JSON.stringify(form.getValues(), null, 4)}
+                    </code>
+                </pre>
+            )
         })
-    }   
+    }
 
     return (
         <Dialog {...Props}>
@@ -41,7 +67,6 @@ export function LocationDetailsDialog(Props: DialogProps) {
                     <Form {...form}>
                         <form onSubmit={form.handleSubmit(onSubmit)}>
                             <div className="grid grid-cols-2 gap-2 mb-2">
-                                {/* <div className="bg-red-200">name</div> */}
                                 <FormField 
                                     control={form.control}
                                     name="name"
@@ -56,7 +81,6 @@ export function LocationDetailsDialog(Props: DialogProps) {
                                     )}
                                 />
 
-                                {/* <div className="bg-red-200">city</div> */}
                                 <FormField 
                                     control={form.control}
                                     name="city"
@@ -71,7 +95,6 @@ export function LocationDetailsDialog(Props: DialogProps) {
                                     )}
                                 />
                                 
-                                {/* <div className="bg-red-200">streetname</div> */}
                                 <FormField 
                                     control={form.control}
                                     name="street_name"
@@ -86,7 +109,6 @@ export function LocationDetailsDialog(Props: DialogProps) {
                                     )}
                                 />
 
-                                {/* <div className="bg-red-200">number</div> */}
                                 <FormField
                                     control={form.control}
                                     name="number"
@@ -94,14 +116,13 @@ export function LocationDetailsDialog(Props: DialogProps) {
                                         <FormItem>
                                             <FormLabel>Número<span className="text-red-400">*</span>:</FormLabel>
                                             <FormControl>
-                                                <Input type="number" min={0} step={0} {...field}/>
+                                                <Input type="number" step={0} {...field}/>
                                             </FormControl>
                                             <FormMessage />
                                         </FormItem>
                                     )}
                                 />
 
-                                {/* <div className="bg-red-200">bairro</div> */}
                                 <FormField
                                     control={form.control}
                                     name="neighborhood"
@@ -116,7 +137,6 @@ export function LocationDetailsDialog(Props: DialogProps) {
                                     )}
                                 />
 
-                                {/* <div className="bg-red-200">CEP</div> */}
                                 <FormField 
                                     control={form.control}
                                     name="CEP"
@@ -124,29 +144,28 @@ export function LocationDetailsDialog(Props: DialogProps) {
                                         <FormItem>
                                             <FormLabel>CEP<span className="text-red-400">*</span>:</FormLabel>
                                             <FormControl>
-                                                <Input {...field}/> 
+                                                <Input {...field} ref={refInputCEP}/>
                                             </FormControl>
                                             <FormMessage />
                                         </FormItem>
                                     )}
                                 />
 
-                                {/* <div className="bg-red-200 row-span-2 h-full">description</div> */}
                                 <FormField 
                                     control={form.control}
                                     name="description"
                                     render={({field})=>(
                                         <FormItem>
-                                            <FormLabel>Descrição<span className="text-red-400">*</span>:</FormLabel>
+                                            <FormLabel>Descrição:</FormLabel>
                                             <FormControl>
                                                 <Textarea {...field}/>
                                             </FormControl>
+                                            <FormDescription>Descreva o Local</FormDescription>
                                             <FormMessage />
                                         </FormItem>
                                     )}
                                 />
 
-                                {/* <div className="bg-red-200 row-span-2 h-full">Complement</div>perto do posto */}
                                 <FormField 
                                     control={form.control}
                                     name="complement"
@@ -156,6 +175,7 @@ export function LocationDetailsDialog(Props: DialogProps) {
                                             <FormControl>
                                                 <Textarea {...field}/>
                                             </FormControl>
+                                            <FormDescription>Exemplo: Perto do posto de saúde</FormDescription>
                                             <FormMessage />
                                         </FormItem>
                                     )}
