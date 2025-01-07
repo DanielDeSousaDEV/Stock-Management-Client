@@ -1,3 +1,4 @@
+import { CreateLocationDialog } from "@/components/CreateLocationDialog";
 import { LocationCard } from "@/components/LocationCard";
 import { LocationDetailsDialog } from "@/components/LocationDetailsDialog";
 import { Button } from "@/components/ui/button";
@@ -15,7 +16,7 @@ const locations: Location[] = [
         Neighborhood: "Centro",
         State: "NY",
         City: "New York",
-        CEP: "10001",
+        CEP: "10001-000",
     },
     {
         Id: 2,
@@ -27,7 +28,7 @@ const locations: Location[] = [
         Neighborhood: "Comercial",
         State: "CA",
         City: "Los Angeles",
-        CEP: "90015",
+        CEP: "90015-000",
     },
     {
         Id: 3,
@@ -39,7 +40,7 @@ const locations: Location[] = [
         Neighborhood: "Praia",
         State: "FL",
         City: "Miami",
-        CEP: "33139",
+        CEP: "33139-000",
     },
     {
         Id: 4,
@@ -128,13 +129,20 @@ const locations: Location[] = [
 ];
 
 export function Locations() {
+    const [isCreateLocationDialogOpen, setIsCreateLocationDialogOpen] = useState<boolean>(false)
+
+    const openCreateLocationDialog = () => {
+        setIsCreateLocationDialogOpen(true)
+    }
+    const closeCreateLocationDialog = () => {
+        setIsCreateLocationDialogOpen(false)
+    }
+    
     const [isLocationDetailsDialogOpen, setIsLocationDetailsDialogOpen] = useState<boolean>(false)
     const [locationSelected, setLocationSelected] = useState<Location>({} as Location)
     
     const openLocationDetailsDialog = (Location: Location) => {
         setLocationSelected(Location)
-        // console.log(locationSelected);
-        
         setIsLocationDetailsDialogOpen(true)
     }
     const closeLocationDetailsDialog = (e: SyntheticEvent) => {
@@ -145,7 +153,7 @@ export function Locations() {
         <div>
             <div className="flex items-center justify-between mb-4">
                 <h3 className="text-lg font-semibold capitalize">Localizações</h3>
-                <Button>Fazer uma Movimentação</Button>
+                <Button onClick={openCreateLocationDialog}>Fazer uma Movimentação</Button>
             </div>
 
             <div className="grid grid-cols-4 gap-1">
@@ -161,6 +169,11 @@ export function Locations() {
                     onOpenChange={setIsLocationDetailsDialogOpen}
                 />
             )}
+
+            <CreateLocationDialog
+                open={isCreateLocationDialogOpen} 
+                onOpenChange={setIsCreateLocationDialogOpen}                
+            />
         </div>
     )
 }

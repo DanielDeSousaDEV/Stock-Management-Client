@@ -12,15 +12,9 @@ import { useForm } from "react-hook-form";
 import { useMask } from '@react-input/mask';
 import { toast } from "@/hooks/use-toast";
 import { useState } from "react";
-import { Location } from "@/types/Location";
 
-interface CreateLocationDialogProps extends DialogProps{
-    Location: Location
-}
+export function CreateLocationDialog(Props: DialogProps) {
 
-export function CreateLocationDialog({Location, ...Props}: CreateLocationDialogProps) {
-    console.log(Location);
-    
     const form = useForm<z.infer<typeof createLocationSchema>>({
         resolver: zodResolver(createLocationSchema),
         defaultValues: {
@@ -55,6 +49,7 @@ export function CreateLocationDialog({Location, ...Props}: CreateLocationDialogP
     function onSubmit (data: z.infer<typeof createLocationSchema>) {
         toast({
             title: 'Deu submit',
+            duration: 1000,
             description: (
                 <pre>
                     <code>

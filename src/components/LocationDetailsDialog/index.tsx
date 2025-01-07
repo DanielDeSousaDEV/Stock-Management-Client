@@ -54,20 +54,20 @@ export function LocationDetailsDialog({Location, ...Props}: LocationDetailsDialo
     })
 
     function onSubmit (data: z.infer<typeof updateLocationSchema>) {
-        console.log('deu submit');
-        console.log(data);
+        // console.log('deu submit');
+        // console.log(data);
         
-        // toast({
-        //     title: 'Deu submit',
-        //     duration: 1000,
-        //     description: (
-        //         <pre>
-        //             <code>
-        //                 {JSON.stringify(form.getValues(), null, 4)}
-        //             </code>
-        //         </pre>
-        //     )
-        // })
+        toast({
+            title: 'Deu submit',
+            duration: 1000,
+            description: (
+                <pre>
+                    <code>
+                        {JSON.stringify(form.getValues(), null, 4)}
+                    </code>
+                </pre>
+            )
+        })
     }
 
     return (

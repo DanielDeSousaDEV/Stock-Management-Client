@@ -16,9 +16,10 @@ export const createLocationSchema = z.object({
         .int({message: 'Por favor informe um numero inteiro'})
         .positive('Por favor informe maior que zero')),
     complement: z.string({required_error: 'Por favor informe um completo para a localização'})
+        .min(2, {message: 'O complemento deve possuir mais que 2 letras'})
         .max(120, {message: 'A descrição deve ter menos que 120 caracteres'}),
     neighborhood: z.string({required_error: 'Por favor informe o bairro da localização'})
-        .min(2, {message: 'O nome do bairro deve possuir 2 letras'}),
+        .min(2, {message: 'O nome do bairro deve possuir mais 2 letras'}),
     // state: z.string({required_error: 'Por favor informe o estado da localização'})
     //     .min(2, {message: 'O nome do estado deve possuir mais que 2 letras'})           
     //     .max(2, {message: 'O nome do bairro deve possuir 2 letras'}),
@@ -47,10 +48,11 @@ export const updateLocationSchema = z.object({
         .positive('Por favor informe maior que zero'))
         .optional(),
     complement: z.string({required_error: 'Por favor informe um completo para a localização'})
+        .min(2, {message: 'O complemento deve possuir mais que 2 letras'})
         .max(120, {message: 'A descrição deve ter menos que 120 caracteres'})
         .optional(),
     neighborhood: z.string({required_error: 'Por favor informe o bairro da localização'})
-        .min(2, {message: 'O nome do bairro deve possuir 2 letras'})
+        .min(2, {message: 'O nome do bairro deve possuir mais 2 letras'})
         .optional(),
     // state: z.string({required_error: 'Por favor informe o estado da localização'})
     //     .min(2, {message: 'O nome do estado deve possuir mais que 2 letras'})           
