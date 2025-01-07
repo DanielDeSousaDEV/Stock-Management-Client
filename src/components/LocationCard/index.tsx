@@ -4,10 +4,11 @@ import { Button } from "../ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "../ui/card";
 
 export interface LocationCardProps {
-    Location: Location
+    Location: Location,
+    handlerOpenDetails: (Location: Location) => void 
 }
 
-export function LocationCard ({Location}: LocationCardProps) {
+export function LocationCard ({Location, handlerOpenDetails}: LocationCardProps) {
     return (
         <Card>
             <CardContent>
@@ -19,7 +20,7 @@ export function LocationCard ({Location}: LocationCardProps) {
                 <p className="truncate">{Location.Neighborhood}</p>
                 <p className="truncate">{Location.City}</p>
                 <CardFooter className="flex justify-end p-0 py-2">
-                    <Button size="sm">Detalhes</Button>
+                    <Button size="sm" onClick={() => handlerOpenDetails(Location)}>Detalhes</Button>
                 </CardFooter>
             </CardContent>
         </Card>

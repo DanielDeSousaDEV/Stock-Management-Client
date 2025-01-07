@@ -2,7 +2,7 @@ import { LocationCard } from "@/components/LocationCard";
 import { LocationDetailsDialog } from "@/components/LocationDetailsDialog";
 import { Button } from "@/components/ui/button";
 import { Location } from "@/types/Location";
-import { useState } from "react";
+import { SyntheticEvent, useState } from "react";
 
 const locations: Location[] = [
     {
@@ -129,11 +129,15 @@ const locations: Location[] = [
 
 export function Locations() {
     const [isLocationDetailsDialogOpen, setIsLocationDetailsDialogOpen] = useState<boolean>(false)
+    const [locationSelected, setLocationSelected] = useState<Location>({} as Location)
     
-    const openLocationDetailsDialog = () => {
+    const openLocationDetailsDialog = (Location: Location) => {
+        setLocationSelected(Location)
+        // console.log(locationSelected);
+        
         setIsLocationDetailsDialogOpen(true)
     }
-    const closeLocationDetailsDialog = () => {
+    const closeLocationDetailsDialog = (e: SyntheticEvent) => {
         setIsLocationDetailsDialogOpen(false)
     }
 
@@ -141,16 +145,22 @@ export function Locations() {
         <div>
             <div className="flex items-center justify-between mb-4">
                 <h3 className="text-lg font-semibold capitalize">Localizações</h3>
-                <Button onClick={openLocationDetailsDialog}>Fazer uma Movimentação</Button>
+                <Button>Fazer uma Movimentação</Button>
             </div>
 
             <div className="grid grid-cols-4 gap-1">
                 {locations.map((location)=>(
-                    <LocationCard key={location.Id} Location={location}/>
+                    <LocationCard handlerOpenDetails={openLocationDetailsDialog} key={location.Id} Location={location}/>
                 ))}
             </div>
 
-            <LocationDetailsDialog open={isLocationDetailsDialogOpen} onOpenChange={setIsLocationDetailsDialogOpen}/>
+            {isLocationDetailsDialogOpen && locationSelected && (
+                <LocationDetailsDialog
+                    Location={locationSelected} 
+                    open={isLocationDetailsDialogOpen} 
+                    onOpenChange={setIsLocationDetailsDialogOpen}
+                />
+            )}
         </div>
     )
 }

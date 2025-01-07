@@ -1,4 +1,4 @@
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "../ui/dialog";
+import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "../ui/dialog";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
@@ -6,43 +6,32 @@ import { Textarea } from "../ui/textarea";
 import { DialogProps } from "@radix-ui/react-dialog";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { updateLocationSchema } from "@/utils/validation/location";
+import { createLocationSchema } from "@/utils/validation/location";
 
 import { useForm } from "react-hook-form";
 import { useMask } from '@react-input/mask';
 import { toast } from "@/hooks/use-toast";
-import { SyntheticEvent, useState } from "react";
+import { useState } from "react";
 import { Location } from "@/types/Location";
 
-interface LocationDetailsDialogProps extends DialogProps{
+interface CreateLocationDialogProps extends DialogProps{
     Location: Location
 }
 
-export function LocationDetailsDialog({Location, ...Props}: LocationDetailsDialogProps) {
-    const [isEditable, setIsEditable] = useState<boolean>(false)
-
-    function setEditableForm (e: SyntheticEvent) {
-        e.preventDefault()
-        setIsEditable(true)
-    } 
-
-    function setDisabledForm () {
-        setIsEditable(false)
-        form.reset()
-    } 
+export function CreateLocationDialog({Location, ...Props}: CreateLocationDialogProps) {
+    console.log(Location);
     
-    const form = useForm<z.infer<typeof updateLocationSchema>>({
-        resolver: zodResolver(updateLocationSchema),
-        disabled: !isEditable,
+    const form = useForm<z.infer<typeof createLocationSchema>>({
+        resolver: zodResolver(createLocationSchema),
         defaultValues: {
-            name: Location.Name,
-            city: Location.City,
-            CEP: Location.CEP,
-            neighborhood: Location.Neighborhood,
-            street_name: Location.StreetName,
-            number: Location.Number,
-            description: Location.Description,
-            complement: Location.Complement
+            name: '',
+            city: '',
+            CEP: '',
+            neighborhood: '',
+            street_name: '',
+            number: 0,
+            description: '',
+            complement: ''
         }
     })
 
@@ -53,21 +42,27 @@ export function LocationDetailsDialog({Location, ...Props}: LocationDetailsDialo
         }
     })
 
-    function onSubmit (data: z.infer<typeof updateLocationSchema>) {
-        console.log('deu submit');
-        console.log(data);
-        
-        // toast({
-        //     title: 'Deu submit',
-        //     duration: 1000,
-        //     description: (
-        //         <pre>
-        //             <code>
-        //                 {JSON.stringify(form.getValues(), null, 4)}
-        //             </code>
-        //         </pre>
-        //     )
-        // })
+    const [isEditable, setIsEditable] = useState<boolean>(false)
+    
+    // const [possibleStates, setPossibleStates] = useState<AxiosResponse>()
+    // useEffect(()=>{
+    //     axios.get('http://servicodados.ibge.gov.br/api/v1/localidades/estados').then((response: AxiosResponse<State[]>)=>{
+    //         console.log(response);
+    //         setPossibleStates(response);
+    //     })
+    // }, [])
+
+    function onSubmit (data: z.infer<typeof createLocationSchema>) {
+        toast({
+            title: 'Deu submit',
+            description: (
+                <pre>
+                    <code>
+                        {JSON.stringify(form.getValues(), null, 4)}
+                    </code>
+                </pre>
+            )
+        })
     }
 
     return (
@@ -79,7 +74,6 @@ export function LocationDetailsDialog({Location, ...Props}: LocationDetailsDialo
                     </DialogTitle>
                     <DialogDescription>
                         Confira os detalhes da localização abaixo
-                        <input type="checkbox" checked={isEditable} onClick={()=>{setIsEditable(!isEditable)}}/>
                     </DialogDescription>
                 </DialogHeader>
                     <Form {...form}>
@@ -178,11 +172,7 @@ export function LocationDetailsDialog({Location, ...Props}: LocationDetailsDialo
                                             <FormControl>
                                                 <Textarea {...field}/>
                                             </FormControl>
-                                            <FormDescription>
-                                                {isEditable && (
-                                                    'Descreva o Local'
-                                                )}
-                                            </FormDescription>
+                                            <FormDescription>Descreva o Local</FormDescription>
                                             <FormMessage />
                                         </FormItem>
                                     )}
@@ -197,11 +187,7 @@ export function LocationDetailsDialog({Location, ...Props}: LocationDetailsDialo
                                             <FormControl>
                                                 <Textarea {...field}/>
                                             </FormControl>
-                                            <FormDescription>
-                                                {isEditable && (
-                                                    'Exemplo: Perto do posto de saúde'
-                                                )}
-                                            </FormDescription>
+                                            <FormDescription>Exemplo: Perto do posto de saúde</FormDescription>
                                             <FormMessage />
                                         </FormItem>
                                     )}
@@ -209,25 +195,16 @@ export function LocationDetailsDialog({Location, ...Props}: LocationDetailsDialo
                             </div>
                             
                             <DialogFooter>
-                                {isEditable && (
-                                    <div className="flex justify-end gap-2">
-                                        <Button type="button" variant="destructive" onClick={setDisabledForm}>
-                                            Cancelar Edição
-                                        </Button>
-                                        <Button type="submit">
-                                            Concluir Edição
-                                        </Button>
-                                    </div>
-                                ) || (
-                                    <div className="flex justify-end gap-2">
+                                <div className="flex justify-end gap-2">
+                                    <DialogClose>
                                         <Button type="button" variant="destructive">
-                                            Deletar
+                                            Cancelar
                                         </Button>
-                                        <Button type="button" onClick={setEditableForm}>
-                                            Editar
-                                        </Button>
-                                    </div>
-                                )}
+                                    </DialogClose>
+                                    <Button type="submit">
+                                        Criar Produto
+                                    </Button>
+                                </div>
                             </DialogFooter>
                         </form>
                     </Form>
