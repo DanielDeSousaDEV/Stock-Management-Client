@@ -4,20 +4,21 @@ import React from "react";
 import { BiBox, BiMap, BiSolidAdjust } from "react-icons/bi";
 import { RiLoginCircleLine, RiLogoutCircleRLine, RiQuestionLine } from "react-icons/ri";
 import { IconBaseProps } from "react-icons";
+import { DialogProps } from "@radix-ui/react-dialog";
 
-interface MovementAccordionProps {
+interface MovementAccordionProps extends DialogProps {
     Movement:Movement
 }
 interface MovementAccordionFakeProps {
     id: string
     Type: "entry" | "output" | "adjustment"
-    ProductName: string
+    productName: string
     LocationName: string
     Quantity: number
     State: string
 }
 
-export function MovementAccordion({id, Type, LocationName, ProductName, Quantity, State, ...Props}:MovementAccordionFakeProps) {
+export function MovementAccordion({Movement, ...Props}:MovementAccordionProps) {
 
     function DefineMovimentIcon(Type:string) :[React.ComponentType<IconBaseProps>, string] {
         switch (Type) {
@@ -51,13 +52,13 @@ export function MovementAccordion({id, Type, LocationName, ProductName, Quantity
         }
     }
     
-    const [MovimentIcon, MovementType] = DefineMovimentIcon(Type)
+    const [MovimentIcon, MovementType] = DefineMovimentIcon(Movement.type)
 
     return(
-        <AccordionItem value={id} className="bg-slate-200 rounded-lg" {...Props}>
+        <AccordionItem value={Movement.id.toString()} className="bg-slate-200 rounded-lg" {...Props}>
             <AccordionTrigger>
                 <div className="flex items-center font-semibold gap-4 text-base">
-                    <span>#{id}</span> {ProductName} <MovimentIcon className="text-sky-900 leading-4" size="1.5rem" /> {LocationName}
+                    <span>#{Movement.id}</span> {Movement.product.name} <MovimentIcon className="text-sky-900 leading-4" size="1.5rem" /> {Movement.location.name}
                 </div>
             </AccordionTrigger>
             <AccordionContent>
@@ -69,11 +70,11 @@ export function MovementAccordion({id, Type, LocationName, ProductName, Quantity
                         <div>
                             <div className="mb-1">
                                 <p className="font-semibold">Nome:</p>
-                                <p>{ProductName}</p>
+                                <p>{Movement.product.name}</p>
                             </div>
                             <div>
                                 <p className="font-semibold">Quatidade:</p>
-                                <p>{Quantity}</p>
+                                <p>{Movement.quantity}</p>
                             </div>
                         </div>
                     </div>
@@ -85,11 +86,11 @@ export function MovementAccordion({id, Type, LocationName, ProductName, Quantity
                         <div>
                             <div className="mb-1">
                                 <p className="font-semibold">Nome:</p>
-                                <p>{LocationName}</p>
+                                <p>{Movement.location.name}</p>
                             </div>
                             <div>
-                                <p className="font-semibold">Estado:</p>
-                                <p>{State}</p>
+                                <p className="font-semibold">Bairro:</p>
+                                <p>{Movement.location.neighborhood}</p>
                             </div>
                         </div>
                     </div>

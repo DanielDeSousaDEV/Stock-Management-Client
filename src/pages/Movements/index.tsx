@@ -1,8 +1,11 @@
 import { CreateMovementDialog } from "@/components/CreateMovementDialog";
+import { api } from "@/lib/api";
+import { Movement } from "@/types/Movement";
 import { MovementAccordion } from "@Components/MovementAccordion";
 import { Accordion } from "@Components/ui/accordion";
 import { Button } from "@Components/ui/button";
-import { useState } from "react";
+import { AxiosResponse } from "axios";
+import { useEffect, useState } from "react";
 
 const obj = {
     Type: 'adjustment',
@@ -21,6 +24,14 @@ export function Movements() {
     const closeCreateMovementDialog = () => {
         setIsCreateMovementDialogOpen(false)
     }
+
+    const [movements, setMovements] = useState<Movement[]>([]);
+
+    useEffect(()=>{
+        api.get('/stockMovements').then((response: AxiosResponse<Movement[]>)=>{
+            setMovements(response.data)
+        })
+    }, [])
     
     return (
         <div> 
@@ -31,10 +42,9 @@ export function Movements() {
             
             <div>
                 <Accordion type="multiple" className="space-y-1">
-                    <MovementAccordion id="12" LocationName={obj.LocationName} ProductName={obj.ProductName} Quantity={obj.Quantity} State={obj.State} Type="entry" />
-                    <MovementAccordion id="13" LocationName={obj.LocationName} ProductName={obj.ProductName} Quantity={obj.Quantity} State={obj.State} Type="output" />
-                    <MovementAccordion id="14" LocationName={obj.LocationName} ProductName={obj.ProductName} Quantity={obj.Quantity} State={obj.State} Type="adjustment" />
-                    <MovementAccordion id="15" LocationName={obj.LocationName} ProductName={obj.ProductName} Quantity={obj.Quantity} State={obj.State} Type="entry" />
+                    {movements.map((movement)=>(
+                        <MovementAccordion key={movement.id} Movement={movement}/>
+                    ))}
                 </Accordion>
             </div>
 
