@@ -1,12 +1,12 @@
 import { Category } from "./Category"
 
 export type Product = {
-    Id: number,
-    Name: string,
-    Description: string,
-    ImgUrl: string,
-    Price: number,
-    Quantity: number,
-    MinimumQuantity: number,
-    Category: Category
+    id: number,
+    name: string,
+    description: string,
+    imgUrl: string,
+    price: number,
+    quantity: number,
+    minimumQuantity: number,
+    category: Category
 }

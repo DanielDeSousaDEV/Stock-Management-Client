@@ -1,12 +1,12 @@
 export type Location = {
-    Id: number,
-    Name: string,
-    Description: string,
-    StreetName: string,
-    Number: number,
-    Complement: string,
-    Neighborhood: string,
-    State: string,
-    City: string,
+    id: number,
+    name: string,
+    description: string,
+    streetName: string,
+    number: number,
+    complement: string,
+    neighborhood: string,
+    // state: string,
+    city: string,
     CEP: string
 }
