@@ -9,7 +9,12 @@ import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, Di
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@Components/ui/select";
 import { Textarea } from "@Components/ui/textarea";
 import { createMovementSchema } from "@Utils/validation/movement";
-    
+import { api } from "@/lib/api";
+import { AxiosError, AxiosResponse } from "axios";
+import { Movement } from "@/types/Movement";
+import { toast } from "@/hooks/use-toast";
+import { ToastAction } from "../ui/toast";
+import { ApiError } from "@/types/ApiError";
 
 export function CreateMovementDialog ({...Props}: DialogProps) {
     const form = useForm<z.infer<typeof createMovementSchema>>({
@@ -19,13 +24,28 @@ export function CreateMovementDialog ({...Props}: DialogProps) {
         }
     })
 
-    function onSubmit(data: z.infer<typeof createMovementSchema>) {
-        console.log('dan');
-        console.log(data);
+    function handleReload() {
+        window.location.reload()
     }
 
-    function logger() {
-        console.log(form.getValues());
+    function onSubmit(data: z.infer<typeof createMovementSchema>) {
+        console.log(data);
+        api.post('/stockMovements', data).then((response: AxiosResponse<Movement>)=>{
+            console.log(response.data);
+            
+            toast({
+                title: 'Movimentação feita com sucesso!',
+                description: 'O produto ' + response.data.product.name + ' foi movimentado no(a) ' + response.data.location.name + '.',
+                action: <ToastAction altText="reload page" onClick={handleReload}>recarregar pagina</ToastAction> 
+            })
+        }).catch((error: AxiosError<ApiError>)=>{
+            toast({
+                title: 'Ocorreu um erro',
+                description: error.message //podia colocar em form error
+            })
+
+            console.log(error.response?.data);            
+        })
     }
 
     return (
@@ -41,7 +61,7 @@ export function CreateMovementDialog ({...Props}: DialogProps) {
                                 <div className="grid grid-cols-2 gap-2">
                                         <FormField 
                                             control={form.control}
-                                            name="product"
+                                            name="product_id"
                                             render={({field})=>(
                                                 <FormItem>
                                                     <FormLabel>Produto<span className="text-red-400">*</span>:</FormLabel>
@@ -69,7 +89,7 @@ export function CreateMovementDialog ({...Props}: DialogProps) {
                                         />
                                         <FormField 
                                             control={form.control}
-                                            name="location"
+                                            name="location_id"
                                             render={({field})=>(
                                                 <FormItem>
                                                     <FormLabel>Localização<span className="text-red-400">*</span>:</FormLabel>
@@ -108,10 +128,10 @@ export function CreateMovementDialog ({...Props}: DialogProps) {
                                         />
                                         <FormField 
                                             control={form.control}
-                                            name="movement_type"
+                                            name="type"
                                             render={({field})=>(
                                                 <FormItem>
-                                                    <FormLabel>Localização<span className="text-red-400">*</span>:</FormLabel>
+                                                    <FormLabel>Tipo da movimentação<span className="text-red-400">*</span>:</FormLabel>
                                                         <Select onValueChange={field.onChange} defaultValue={field.value}>
                                                             <FormControl>
                                                                 <SelectTrigger>

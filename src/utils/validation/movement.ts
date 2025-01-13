@@ -1,15 +1,15 @@
 import { z } from 'zod'
 
 export const createMovementSchema = z.object({
-    product: z.string({required_error: 'Por favor selecione um produto'}),
-    location: z.string({required_error: 'Por favor selecione uma localização'}),
+    product_id: z.string({required_error: 'Por favor selecione um produto'}),
+    location_id: z.string({required_error: 'Por favor selecione uma localização'}),
     quantity: z.preprocess(value=> parseFloat(value as string),
         z.number({
             required_error: 'Por favor informe a quantidade',
             message: 'Por favor digite um número'
         })
         .positive({message: 'Digite um valor inteiro'})),
-    movement_type: z.enum([
+    type: z.enum([
         'entry',
         'output',
         'adjustment'

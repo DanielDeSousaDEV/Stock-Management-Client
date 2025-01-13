@@ -18,7 +18,7 @@ export function ProductCard({name, quantity, minQuantity, category, price, imgUR
     return (
         <Card>
             <CardContent className="p-6 flex flex-row gap-2">
-                <img src={imgURL ?? "https://pbs.twimg.com/profile_images/1781410431753396224/KWDTBdz4_400x400.jpg"} loading="lazy" className="aspect-square h-32 rounded-lg object-cover object-center" />
+                <img src={imgURL ?? "https://pbs.twimg.com/profile_images/1781410431753396224/KWDTBdz4_400x400.jpg"} loading="lazy" className="aspect-square h-32 rounded-lg object-cover object-center" draggable='false'/>
                 <div className="flex flex-col justify-between w-full">
                     <div>
                         <CardHeader className="p-0 flex flex-row items-center justify-between">

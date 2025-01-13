@@ -1,19 +1,13 @@
 import { CreateMovementDialog } from "@/components/CreateMovementDialog";
+import { toast } from "@/hooks/use-toast";
 import { api } from "@/lib/api";
+import { ApiError } from "@/types/ApiError";
 import { Movement } from "@/types/Movement";
 import { MovementAccordion } from "@Components/MovementAccordion";
 import { Accordion } from "@Components/ui/accordion";
 import { Button } from "@Components/ui/button";
-import { AxiosResponse } from "axios";
+import { AxiosError, AxiosResponse } from "axios";
 import { useEffect, useState } from "react";
-
-const obj = {
-    Type: 'adjustment',
-    ProductName: "sabão",
-    LocationName: "rua dom joão",
-    Quantity: 12,
-    State: 'BH',
-}
 
 export function Movements() {
     const [isCreateMovementDialogOpen, setIsCreateMovementDialogOpen] = useState<boolean>(false)
@@ -30,6 +24,11 @@ export function Movements() {
     useEffect(()=>{
         api.get('/stockMovements').then((response: AxiosResponse<Movement[]>)=>{
             setMovements(response.data)
+        }).catch((error: AxiosError<ApiError>)=>{
+            toast({
+                title: 'Ocorreu um erro',
+                description: error.message
+            })
         })
     }, [])
     

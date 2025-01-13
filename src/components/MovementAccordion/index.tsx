@@ -9,14 +9,6 @@ import { DialogProps } from "@radix-ui/react-dialog";
 interface MovementAccordionProps extends DialogProps {
     Movement:Movement
 }
-interface MovementAccordionFakeProps {
-    id: string
-    Type: "entry" | "output" | "adjustment"
-    productName: string
-    LocationName: string
-    Quantity: number
-    State: string
-}
 
 export function MovementAccordion({Movement, ...Props}:MovementAccordionProps) {
 
