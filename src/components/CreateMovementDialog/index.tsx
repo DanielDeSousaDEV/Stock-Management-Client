@@ -14,7 +14,7 @@ import { AxiosError, AxiosResponse } from "axios";
 import { Movement } from "@/types/Movement";
 import { toast } from "@/hooks/use-toast";
 import { ToastAction } from "../ui/toast";
-import { ApiError } from "@/types/ApiError";
+import { ApiError } from "@/types/ApiResponses";
 
 export function CreateMovementDialog ({...Props}: DialogProps) {
     const form = useForm<z.infer<typeof createMovementSchema>>({

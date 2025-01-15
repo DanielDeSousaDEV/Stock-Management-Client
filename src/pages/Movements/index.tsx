@@ -1,7 +1,7 @@
 import { CreateMovementDialog } from "@/components/CreateMovementDialog";
 import { toast } from "@/hooks/use-toast";
 import { api } from "@/lib/api";
-import { ApiError } from "@/types/ApiError";
+import { ApiErrorResponse, ApiResponse } from "@/types/ApiResponses";
 import { Movement } from "@/types/Movement";
 import { MovementAccordion } from "@Components/MovementAccordion";
 import { Accordion } from "@Components/ui/accordion";
@@ -24,12 +24,12 @@ export function Movements() {
     useEffect(()=>{
         api.get('/stockMovements').then((response: AxiosResponse<Movement[]>)=>{
             setMovements(response.data)
-        }).catch((error: AxiosError<ApiError>)=>{
+        }).catch((error: AxiosError<ApiErrorResponse>)=>{
             toast({
                 title: 'Ocorreu um erro',
                 description: error.message
             })
-        })
+        })  
     }, [])
     
     return (
