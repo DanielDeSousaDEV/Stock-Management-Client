@@ -1,3 +1,4 @@
+import { Toaster } from "@/components/ui/toaster";
 import { Outlet } from "react-router";
 
 export function LoginLayout() {
@@ -8,6 +9,8 @@ export function LoginLayout() {
             <div className="z-10">
                 <Outlet />
             </div>
+
+            <Toaster /> 
         </div>
     )
 }

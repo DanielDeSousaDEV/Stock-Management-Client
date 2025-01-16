@@ -1,13 +1,22 @@
 import { Button } from "@/components/ui/button"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
+import { ToastAction } from "@/components/ui/toast"
+import { useApi } from "@/hooks/use-api"
+import { toast } from "@/hooks/use-toast"
+import { ApiErrorResponse, ApiResponse } from "@/types/ApiResponses"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { signUpSchema } from "@Utils/validation/signUp"
+import { AxiosError, AxiosResponse } from "axios"
 import { useForm } from "react-hook-form"
-import { Link } from "react-router"
+import { Link, useNavigate } from "react-router"
 import { z } from "zod"
 
 export function SignUp() {
+
+    const api = useApi()
+
+    const navigate = useNavigate()
 
     const form = useForm<z.infer<typeof signUpSchema>>({
         resolver: zodResolver(signUpSchema),
@@ -19,8 +28,32 @@ export function SignUp() {
     })
 
     function onSubmit(data: z.infer<typeof signUpSchema>) {
-        console.log('deu certo');
-        console.log(data);
+        api.post('/signUp', data).then((response: AxiosResponse<ApiResponse>)=>{
+            console.log(response);
+
+            toast({
+                title: 'Usuario criado com sucesso',
+                description: 'Volte á pagina de login',
+                action: (
+                    <ToastAction altText="Voltar ao login" onClick={backForLogin}>
+                        Voltar ao login
+                    </ToastAction>
+                )
+            })
+        }).catch((error: AxiosError<ApiErrorResponse>)=>{
+            console.log(error);
+
+            const errorMessage = error.response?.data?.message || error.message || 'Erro desconhecido';
+
+            toast({
+                title: 'Ocorreu um erro',
+                description: errorMessage
+            })
+        })
+    }
+
+    function backForLogin() {
+        navigate('/login')
     }
 
     return (

@@ -1,34 +1,24 @@
+import { useApi } from "@/hooks/use-api";
 import { toast } from "@/hooks/use-toast";
-import { api } from "@/lib/api";
 import { ApiAuthResponse, ApiErrorResponse, ApiResponse } from "@/types/ApiResponses";
 import { Button } from "@Components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@Components/ui/form";
 import { Input } from "@Components/ui/input";
 import { loginSchema } from "@Utils/validation/login";
 import { zodResolver } from "@hookform/resolvers/zod";
-import axios, { AxiosError, AxiosResponse } from "axios";
+import { AxiosError, AxiosResponse } from "axios";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router";
+import { Link, redirect, useNavigate } from "react-router";
 import { z } from "zod";
 
 export function Login() {
+    const api = useApi();
+
     const navigate = useNavigate()
 
-    useEffect(()=>{//tira o api do inicio
-        // api.get('/sanctum/csrf-cookie',{
-        //     baseURL: 'http://127.0.0.1:8000/',
-        //     url: 'sanctum/csrf-cookie',
-        //     withCredentials: true,
-        //     withXSRFToken: true
-        // }).then((response: AxiosResponse)=>{
-        //     console.log('deu certo o csrf');
-        //     console.log(response);
-        // }).catch((error: AxiosError)=>{
-        //     console.log('deu errado o csrf');
-        //     console.log(error);
-        // })
-    }, [])
+    //quando eu logo ele pegar o antigo api
+    //quando eu vou e volto pelo o navigate ele perserva o api
 
     const form = useForm<z.infer<typeof loginSchema>>({
         resolver: zodResolver(loginSchema),
@@ -47,22 +37,28 @@ export function Login() {
 
             toast({
                 title: 'Logado com sucesso!',
-                description: 'Aguarde o redirecionamento'
-            })
+                description: 'Aguarde o redirecionamento...'
+            });
             
             setTimeout(()=>{
                 navigate('/')
-            }, 3000)    
+            }, 3000)
             
         }).catch((error: AxiosError<ApiErrorResponse>)=>{
             console.log('erro');
-            console.log(error.response?.data);
+            
+            const errorMessage = error.response?.data?.message || error.message || 'Erro desconhecido';
+
+            toast({
+                title: 'Ocorreu um erro',
+                description: errorMessage
+            })            
         })
     }
 
     function logger() {
         api.post('/logout', { email: 'daniel@teste.com', password: 'dandan' }, {withCredentials: true}).then((response: AxiosResponse<ApiAuthResponse>)=>{
-            // localStorage.setItem('ApiToken', response.data.token)
+            localStorage.removeItem('ApiToken')
             console.log(response);
             
         })

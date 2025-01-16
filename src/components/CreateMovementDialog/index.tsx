@@ -9,14 +9,16 @@ import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, Di
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@Components/ui/select";
 import { Textarea } from "@Components/ui/textarea";
 import { createMovementSchema } from "@Utils/validation/movement";
-import { api } from "@/lib/api";
 import { AxiosError, AxiosResponse } from "axios";
 import { Movement } from "@/types/Movement";
 import { toast } from "@/hooks/use-toast";
 import { ToastAction } from "../ui/toast";
-import { ApiError } from "@/types/ApiResponses";
+import { ApiErrorResponse } from "@/types/ApiResponses";
+import { useApi } from "@/hooks/use-api";
 
 export function CreateMovementDialog ({...Props}: DialogProps) {
+    const api = useApi();
+
     const form = useForm<z.infer<typeof createMovementSchema>>({
         resolver: zodResolver(createMovementSchema),
         defaultValues: {
@@ -38,10 +40,13 @@ export function CreateMovementDialog ({...Props}: DialogProps) {
                 description: 'O produto ' + response.data.product.name + ' foi movimentado no(a) ' + response.data.location.name + '.',
                 action: <ToastAction altText="reload page" onClick={handleReload}>recarregar pagina</ToastAction> 
             })
-        }).catch((error: AxiosError<ApiError>)=>{
+        }).catch((error: AxiosError<ApiErrorResponse>)=>{
+            
+            const errorMessage = error.response?.data?.message || error.message || 'Erro desconhecido';
+
             toast({
                 title: 'Ocorreu um erro',
-                description: error.message //podia colocar em form error
+                description: errorMessage //podia colocar em form error
             })
 
             console.log(error.response?.data);            

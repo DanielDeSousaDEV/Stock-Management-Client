@@ -1,6 +1,6 @@
 import { CreateMovementDialog } from "@/components/CreateMovementDialog";
+import { useApi } from "@/hooks/use-api";
 import { toast } from "@/hooks/use-toast";
-import { api } from "@/lib/api";
 import { ApiErrorResponse, ApiResponse } from "@/types/ApiResponses";
 import { Movement } from "@/types/Movement";
 import { MovementAccordion } from "@Components/MovementAccordion";
@@ -10,6 +10,8 @@ import { AxiosError, AxiosResponse } from "axios";
 import { useEffect, useState } from "react";
 
 export function Movements() {
+    const api = useApi();
+
     const [isCreateMovementDialogOpen, setIsCreateMovementDialogOpen] = useState<boolean>(false)
 
     const openCreateMovementDialog = () => {
@@ -25,9 +27,11 @@ export function Movements() {
         api.get('/stockMovements').then((response: AxiosResponse<Movement[]>)=>{
             setMovements(response.data)
         }).catch((error: AxiosError<ApiErrorResponse>)=>{
+            const errorMessage = error.response?.data?.message || error.message || 'Erro desconhecido';
+
             toast({
                 title: 'Ocorreu um erro',
-                description: error.message
+                description: errorMessage
             })
         })  
     }, [])
