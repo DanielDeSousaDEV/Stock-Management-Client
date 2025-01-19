@@ -4,9 +4,9 @@ export type Product = {
     id: number,
     name: string,
     description: string,
-    imgUrl: string,
+    img_url: string,
     price: number,
     quantity: number,
-    minimumQuantity: number,
+    minimum_quantity: number,
     category: Category
 }

@@ -61,7 +61,7 @@ export function Products() {
         //     variant: 'primary'
         // });
 
-        console.log(selectedCategories);
+        console.log(categories);
         
     }
 

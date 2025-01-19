@@ -9,12 +9,14 @@ export interface ProductCardProps {
 }
 
 export function ProductCard({Product}:ProductCardProps) {
-    const withLowStock = Product.quantity < Product.minimumQuantity;
+    const withLowStock = Product.quantity < Product.minimum_quantity;
+
+    const bgCategoryColor = Product.category.hex_color
 
     return (
         <Card>
             <CardContent className="p-6 flex flex-row gap-2">
-                <img src={Product.imgUrl ?? "https://pbs.twimg.com/profile_images/1781410431753396224/KWDTBdz4_400x400.jpg"} loading="lazy" className="aspect-square h-32 rounded-lg object-cover object-center" draggable='false'/>
+                <img src={Product.img_url ?? "https://pbs.twimg.com/profile_images/1781410431753396224/KWDTBdz4_400x400.jpg"} loading="lazy" className="aspect-square h-32 rounded-lg object-cover object-center" draggable='false'/>
                 <div className="flex flex-col justify-between w-full">
                     <div>
                         <CardHeader className="p-0 flex flex-row items-center justify-between">
@@ -32,7 +34,14 @@ export function ProductCard({Product}:ProductCardProps) {
                                 </Popover>
                             )}
                         </CardHeader>
-                        <Badge>{Product.category.name}</Badge>
+                        <Badge 
+                            className="text-zinc-800 hover:saturate-[350%] hover:brightness-90 transition-all"
+                            style={{
+                                backgroundColor: bgCategoryColor
+                            }}
+                        >
+                                {Product.category.name}
+                        </Badge>
                     </div>
                     <CardFooter className="p-0 flex items-center justify-between gap-4">
                         <p><span className="font-semibold">Qtd: </span>{Product.quantity}</p>

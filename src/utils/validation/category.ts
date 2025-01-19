@@ -8,7 +8,7 @@ export const createCategorySchema = z.object({
     description: z.string()
         .max(120, {message: 'A descrição deve ter menos que 120 caracteres'})
         .optional(),
-    color_hex: z.string({
+    hex_color: z.string({
         required_error: 'Por favor selecione uma cor para categoria'
     })
 })
