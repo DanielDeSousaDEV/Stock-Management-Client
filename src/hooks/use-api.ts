@@ -18,5 +18,3 @@ export function useApi() {
 function getApiToken() {
     return localStorage.getItem('ApiToken')
 }
-
-//usar esse hook inves da variacels
