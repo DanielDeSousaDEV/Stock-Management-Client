@@ -20,7 +20,7 @@ export function Products() {
 
     const api = useApi();
 
-    const [categoryFilter, setCategoryFilter] = useState<string[]>([])
+    const [selectedCategories, setSelectedCategories] = useState<string[]>([])
 
     useEffect(()=>{
         api.get('/products').then((response: AxiosResponse<Product[]>)=>{
@@ -51,17 +51,17 @@ export function Products() {
     useEffect(()=>{
         const categoriesIdList = categories.map(category => category.id.toString())
 
-        setCategoryFilter(categoriesIdList)
+        setSelectedCategories(categoriesIdList)
     }, [categories])
 
     function logger () {
         // toast({
         //     title: 'deu certo',
-        //     description: JSON.stringify(categoryFilter, null, 2),
+        //     description: JSON.stringify(SelectedCategories, null, 2),
         //     variant: 'primary'
         // });
 
-        console.log(categoryFilter);
+        console.log(selectedCategories);
         
     }
 
@@ -83,18 +83,11 @@ export function Products() {
         setIsCreateCategoryDialogOpen(false)
     }
 
-    // const filteredProducts = products.filter((product) => product.category.id === categoryfilter)
-    if (categoryFilter) {
-        // const filteredProducts = products.map((product) => {categoryFilter.includes({
-        //     key: product.id.toString(),
-        //     isFiltered: true
-        // })})
-    }
-    //preciso pegar a função set com o contexte e alteralo caso necessario 
+    const filteredProducts = products.filter(product => selectedCategories.includes(product.category.id.toString()))
 
     return (
         <div className="grid grid-cols-3 gap-2">
-            <filter.Provider value={[categoryFilter, setCategoryFilter]}>
+            <filter.Provider value={[selectedCategories, setSelectedCategories]}>
                 <div className="col-span-1 bg-slate-200 rounded-lg p-2">
                     <div className="mb-4">
                         <h3 className="text-lg font-semibold capitalize" onClick={logger}>Categorias</h3>
@@ -119,7 +112,7 @@ export function Products() {
                         <Button className="flex-shrink-0" title="Adicionar uma categoria" size="icon" onClick={openCreateProductDialog}><RiAddLine /></Button>
                     </div>
                     <div className="grid grid-cols-2 gap-1">
-                        {products.map((product)=>(
+                        {filteredProducts.map((product)=>(
                             <ProductCard key={product.id} Product={product}/>
                         ))}
                     </div>
