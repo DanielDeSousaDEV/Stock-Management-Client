@@ -40,8 +40,15 @@ export function CreateCategoryDialog ({...Props}: DialogProps) {
                 action: <ToastAction altText="reload page" onClick={handleReload}>recarregar pagina</ToastAction> 
             })
         }).catch((error: AxiosError<ApiErrorResponse>)=>{
-            console.log(error);
 
+            const errorMessage = error.response?.data?.message || error.message || 'Erro desconhecido';
+
+            toast({
+                title: 'Ocorreu um erro',
+                description: errorMessage //podia colocar em form error
+            })
+
+            console.log(error.response?.data); 
         })
     }
 
