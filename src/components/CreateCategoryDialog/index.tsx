@@ -9,8 +9,16 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 import { Button } from "../ui/button";
+import { useApi } from "@/hooks/use-api";
+import { AxiosError, AxiosResponse } from "axios";
+import { ApiErrorResponse, ApiResponse } from "@/types/ApiResponses";
+import { ToastAction } from "../ui/toast";
+import { toast } from "@/hooks/use-toast";
+import { Category } from "@/types/Category";
 
 export function CreateCategoryDialog ({...Props}: DialogProps) {
+    const api = useApi()
+
     const form = useForm<z.infer<typeof createCategorySchema>>({
         resolver: zodResolver(createCategorySchema),
         defaultValues: {
@@ -18,9 +26,23 @@ export function CreateCategoryDialog ({...Props}: DialogProps) {
         }
     })
 
+    function handleReload() {
+        window.location.reload()
+    }
+
     function onSubmit(data: z.infer<typeof createCategorySchema>) {
-        console.log('deu certo');
-        console.log(data);
+        api.post('categories', data).then((response: AxiosResponse<Category>)=>{
+            console.log(response);
+            
+            toast({
+                title: 'Categoria criada com sucesso!',
+                description: 'A categoria ' + response.data.name + ' foi criada.',
+                action: <ToastAction altText="reload page" onClick={handleReload}>recarregar pagina</ToastAction> 
+            })
+        }).catch((error: AxiosError<ApiErrorResponse>)=>{
+            console.log(error);
+
+        })
     }
 
     function logger() {
@@ -68,7 +90,7 @@ export function CreateCategoryDialog ({...Props}: DialogProps) {
 
                                 <FormField 
                                     control={form.control}
-                                    name="color_hex"
+                                    name="hex_color"
                                     render={({field})=>(
                                         <FormItem>
                                             <FormLabel>Selecione uma cor:<span className="text-red-400">*</span>:</FormLabel>
@@ -89,8 +111,8 @@ export function CreateCategoryDialog ({...Props}: DialogProps) {
                                                     ]}
                                                     color={field.value}
                                                     onChange={(color)=>{
-                                                        form.clearErrors('color_hex')
-                                                        form.setValue('color_hex', color.hex)
+                                                        form.clearErrors('hex_color')
+                                                        form.setValue('hex_color', color.hex)
                                                     }}
                                                 />
                                             </FormControl>
