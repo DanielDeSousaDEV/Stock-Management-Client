@@ -9,13 +9,26 @@ import { z } from "zod";
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
+import { Category } from "@/types/Category";
+import { useApi } from "@/hooks/use-api";
+import { AxiosError, AxiosResponse } from "axios";
+import { ApiErrorResponse, ApiResponse } from "@/types/ApiResponses";
+import { Product } from "@/types/Product";
+import { toast } from "@/hooks/use-toast";
+import { ToastAction } from "../ui/toast";
 
 
 /**
  * Quantidade consegue ser menor que qtd minima
  */
 
-export function CreateProductDialog({...Props}:DialogProps) {
+export interface CreateProductDialogProps extends DialogProps {
+    Categories: Category[]
+}
+
+export function CreateProductDialog({Categories, ...Props}:CreateProductDialogProps) {
+    const api = useApi()
+
     const form = useForm<z.infer<typeof createProductSchema>>({
         resolver: zodResolver(createProductSchema),
         defaultValues: {
@@ -26,15 +39,45 @@ export function CreateProductDialog({...Props}:DialogProps) {
         }
     })
 
+    function handleReload() {
+        window.location.reload()
+    }
+
     function onSubmit(data: z.infer<typeof createProductSchema>) {
-        console.log(data);    
+        console.log(data);
+        
+        api.post('products', data).then((response: AxiosResponse<Product>)=>{
+            console.log(response.data);
+            
+            toast({
+                title: 'Produto criado com sucesso!!',
+                description: 'O produto ' + response.data.name + ' foi criado com sucesso.',
+                action: <ToastAction altText="reload page" onClick={handleReload}>recarregar pagina</ToastAction> 
+            })
+        }).catch((error: AxiosError<ApiErrorResponse>)=>{
+            
+            const errorMessage = error.response?.data?.message || error.message || 'Erro desconhecido';
+
+            toast({
+                title: 'Ocorreu um erro',
+                description: errorMessage //podia colocar em form error
+            })
+
+            console.log(error.response?.data);            
+        })
+    }
+
+    function logger() {
+        console.log(form.getValues());
+        console.log(form);
+        
     }
 
     return (
         <Dialog {...Props}>
             <DialogContent>
                 <DialogHeader>
-                    <DialogTitle>
+                    <DialogTitle onClick={logger}>
                         Criar um Produto
                     </DialogTitle>
                     <DialogDescription>
@@ -42,7 +85,7 @@ export function CreateProductDialog({...Props}:DialogProps) {
                     </DialogDescription>
                 </DialogHeader>
                     <Form {...form}>
-                        <form onSubmit={form.handleSubmit(onSubmit)}>
+                        <form onSubmit={form.handleSubmit(onSubmit)} encType="multipart/form-data">
                             <div className="grid grid-cols-2 gap-2 mb-2">
                                 <FormField 
                                     control={form.control}
@@ -129,7 +172,7 @@ export function CreateProductDialog({...Props}:DialogProps) {
                                                         {...rest}
                                                         onChange={(e) => {
                                                             form.clearErrors('image')
-                                                            form.setValue("image", e.target.files as FileList)
+                                                            form.setValue("image", e.target.files![0] as File)
                                                         }}
                                                     />
                                                 </FormControl>
@@ -141,7 +184,7 @@ export function CreateProductDialog({...Props}:DialogProps) {
 
                                 <FormField 
                                     control={form.control}
-                                    name="category"
+                                    name="category_id"
                                     render={({field})=>(
                                         <FormItem>
                                             <FormLabel>Categoria<span className="text-red-400">*</span>:</FormLabel>
@@ -152,8 +195,9 @@ export function CreateProductDialog({...Props}:DialogProps) {
                                                         </SelectTrigger>
                                                     </FormControl>
                                                     <SelectContent>
-                                                        <SelectItem value="1">Aa</SelectItem>
-                                                        <SelectItem value="2">Aa</SelectItem>
+                                                        {Categories.map((Category)=>(
+                                                            <SelectItem value={Category.id.toString()}>{Category.name}</SelectItem>
+                                                        ))}
                                                     </SelectContent>
                                                 </Select>
                                             <FormMessage />

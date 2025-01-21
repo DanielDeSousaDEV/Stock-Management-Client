@@ -119,8 +119,8 @@ export function Products() {
                 </div>
             </filter.Provider>
 
-            <CreateProductDialog open={isCreateProductDialogOpen} onOpenChange={setIsCreateProductDialogOpen} />
-            <CreateCategoryDialog open={isCreateCategoryDialogOpen} onOpenChange={setIsCreateCategoryDialogOpen}/>
+            <CreateProductDialog open={isCreateProductDialogOpen} onOpenChange={setIsCreateProductDialogOpen} Categories={categories}/>
+            <CreateCategoryDialog open={isCreateCategoryDialogOpen} onOpenChange={setIsCreateCategoryDialogOpen} />
 
         </div>
     )

@@ -16,7 +16,7 @@ export function ProductCard({Product}:ProductCardProps) {
     return (
         <Card>
             <CardContent className="p-6 flex flex-row gap-2">
-                <img src={Product.img_url ?? "https://pbs.twimg.com/profile_images/1781410431753396224/KWDTBdz4_400x400.jpg"} loading="lazy" className="aspect-square h-32 rounded-lg object-cover object-center" draggable='false'/>
+                <img src={Product.image ?? "https://pbs.twimg.com/profile_images/1781410431753396224/KWDTBdz4_400x400.jpg"} loading="lazy" className="aspect-square h-32 rounded-lg object-cover object-center" draggable='false'/>
                 <div className="flex flex-col justify-between w-full">
                     <div>
                         <CardHeader className="p-0 flex flex-row items-center justify-between">
