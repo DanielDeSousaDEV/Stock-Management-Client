@@ -26,6 +26,20 @@ export function CreateCategoryDialog ({...Props}: DialogProps) {
         }
     })
 
+    const availableColors = [
+        '#EBBAFF',
+        '#BFBAFF',
+        '#BADFFF',
+        '#BAFDFF',
+        '#BAFFDF',
+        '#BFFFBA',
+        '#F8FFBA',
+        '#FFE4BA',
+        '#FFBCBA',
+        '#FFBADF',
+        '#FFBAEE',
+    ]
+
     function handleReload() {
         window.location.reload()
     }
@@ -103,19 +117,7 @@ export function CreateCategoryDialog ({...Props}: DialogProps) {
                                             <FormLabel>Selecione uma cor:<span className="text-red-400">*</span>:</FormLabel>
                                             <FormControl>
                                                 <Circle 
-                                                    colors={[
-                                                        '#EBBAFF',
-                                                        '#BFBAFF',
-                                                        '#BADFFF',
-                                                        '#BAFDFF',
-                                                        '#BAFFDF',
-                                                        '#BFFFBA',
-                                                        '#F8FFBA',
-                                                        '#FFE4BA',
-                                                        '#FFBCBA',
-                                                        '#FFBADF',
-                                                        '#FFBAEE',
-                                                    ]}
+                                                    colors={availableColors}
                                                     color={field.value}
                                                     onChange={(color)=>{
                                                         form.clearErrors('hex_color')

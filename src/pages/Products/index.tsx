@@ -18,6 +18,8 @@ export function Products() {
     const [products, setProducts] = useState<Product[]>([]);
     const [categories, setCategories] = useState<Category[]>([]);
 
+    const [FilterOfCategoriesName , setFilterOfCategoriesName] = useState<string>('');
+
     const api = useApi();
 
     const [selectedCategories, setSelectedCategories] = useState<string[]>([])
@@ -61,7 +63,7 @@ export function Products() {
         //     variant: 'primary'
         // });
 
-        console.log(categories);
+        console.log(FilterOfCategoriesName);
         
     }
 
@@ -83,7 +85,25 @@ export function Products() {
         setIsCreateCategoryDialogOpen(false)
     }
 
-    const filteredProducts = products.filter(product => selectedCategories.includes(product.category.id.toString()))
+    const filteredCategories = categories.filter(category => {
+        if (!FilterOfCategoriesName) {
+            return category
+        }
+
+        const regex = new RegExp(`${FilterOfCategoriesName}.{0,}`)
+        const categoryName = category.name
+        
+        if(regex.test(categoryName)){
+            return category
+        }
+    }) 
+
+    const filteredProducts = products.filter(product => {
+        if (!product.category) {
+            return product
+        }
+        return selectedCategories.includes(product.category.id.toString())
+    })
 
     return (
         <div className="grid grid-cols-3 gap-2">
@@ -93,11 +113,15 @@ export function Products() {
                         <h3 className="text-lg font-semibold capitalize" onClick={logger}>Categorias</h3>
                     </div>
                     <div className="flex w-full items-center gap-2 mb-2">
-                        <Input className="bg-slate-50 flex-1"/>
+                        <Input 
+                            className="bg-slate-50 flex-1" 
+                            value={FilterOfCategoriesName}
+                            onChange={(e)=>{setFilterOfCategoriesName(e.target.value)}}
+                        />
                         <Button className="flex-shrink-0" title="Adicionar uma categoria" size="icon" onClick={openCreateCategoryDialog}><RiAddLine /></Button>
                     </div>
                     <div className="space-y-1">
-                        {categories.map((category)=>(
+                        {filteredCategories.map((category)=>(
                             <CategoryListItem key={category.id} Category={category}/>
                         ))}
                     </div>

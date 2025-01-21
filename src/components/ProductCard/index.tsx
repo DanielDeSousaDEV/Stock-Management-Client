@@ -11,7 +11,15 @@ export interface ProductCardProps {
 export function ProductCard({Product}:ProductCardProps) {
     const withLowStock = Product.quantity < Product.minimum_quantity;
 
-    const bgCategoryColor = Product.category.hex_color
+    function defineCategoryColor() {
+        if (!Product.category) {
+            return '#BFBAFF'
+        }
+
+        return Product.category.hex_color 
+    }
+
+    const bgCategoryColor = defineCategoryColor()
 
     return (
         <Card>
@@ -40,7 +48,7 @@ export function ProductCard({Product}:ProductCardProps) {
                                 backgroundColor: bgCategoryColor
                             }}
                         >
-                                {Product.category.name}
+                                {Product.category?.name || 'Sem categoria'}
                         </Badge>
                     </div>
                     <CardFooter className="p-0 flex items-center justify-between gap-4">

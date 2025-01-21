@@ -8,5 +8,5 @@ export type Product = {
     price: number,
     quantity: number,
     minimum_quantity: number,
-    category: Category
+    category?: Category
 }
