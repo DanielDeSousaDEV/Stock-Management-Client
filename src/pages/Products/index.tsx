@@ -18,7 +18,8 @@ export function Products() {
     const [products, setProducts] = useState<Product[]>([]);
     const [categories, setCategories] = useState<Category[]>([]);
 
-    const [FilterOfCategoriesName , setFilterOfCategoriesName] = useState<string>('');
+    const [filterOfCategoriesName , setFilterOfCategoriesName] = useState<string>('');
+    const [filterOfProductsName , setFilterOfProductsName] = useState<string>('');
 
     const api = useApi();
 
@@ -63,7 +64,7 @@ export function Products() {
         //     variant: 'primary'
         // });
 
-        console.log(FilterOfCategoriesName);
+        console.log(filteredProducts);
         
     }
 
@@ -86,11 +87,11 @@ export function Products() {
     }
 
     const filteredCategories = categories.filter(category => {
-        if (!FilterOfCategoriesName) {
+        if (!filterOfCategoriesName) {
             return category
         }
 
-        const regex = new RegExp(`${FilterOfCategoriesName}.{0,}`)
+        const regex = new RegExp(`${filterOfCategoriesName}.{0,}`)
         const categoryName = category.name
         
         if(regex.test(categoryName)){
@@ -99,11 +100,23 @@ export function Products() {
     }) 
 
     const filteredProducts = products.filter(product => {
+        if (!filterOfProductsName) {
+            return product
+        }
+
+        const regex = new RegExp(`${filterOfProductsName}.{0,}`)
+        const productName = product.name
+        
+        if(regex.test(productName)){
+            return product 
+        }
+    }).filter(product => {
         if (!product.category) {
             return product
         }
+
         return selectedCategories.includes(product.category.id.toString())
-    })
+    });
 
     return (
         <div className="grid grid-cols-3 gap-2">
@@ -115,7 +128,7 @@ export function Products() {
                     <div className="flex w-full items-center gap-2 mb-2">
                         <Input 
                             className="bg-slate-50 flex-1" 
-                            value={FilterOfCategoriesName}
+                            value={filterOfCategoriesName}
                             onChange={(e)=>{setFilterOfCategoriesName(e.target.value)}}
                         />
                         <Button className="flex-shrink-0" title="Adicionar uma categoria" size="icon" onClick={openCreateCategoryDialog}><RiAddLine /></Button>
@@ -132,7 +145,11 @@ export function Products() {
                         <h3 className="text-lg font-semibold capitalize">Produtos</h3>
                     </div>
                     <div className="flex w-full items-center gap-2 mb-2">
-                        <Input className="bg-slate-50 flex-1"/>
+                        <Input 
+                            className="bg-slate-50 flex-1"
+                            value={filterOfProductsName}
+                            onChange={(e)=>{setFilterOfProductsName(e.target.value)}}
+                        />
                         <Button className="flex-shrink-0" title="Adicionar uma categoria" size="icon" onClick={openCreateProductDialog}><RiAddLine /></Button>
                     </div>
                     <div className="grid grid-cols-2 gap-1">
