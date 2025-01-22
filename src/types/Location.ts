@@ -2,7 +2,7 @@ export type Location = {
     id: number,
     name: string,
     description: string,
-    streetName: string,
+    street_name: string,
     number: number,
     complement: string,
     neighborhood: string,

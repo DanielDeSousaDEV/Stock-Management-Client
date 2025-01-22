@@ -12,8 +12,14 @@ import { useForm } from "react-hook-form";
 import { useMask } from '@react-input/mask';
 import { toast } from "@/hooks/use-toast";
 import { useState } from "react";
+import { useApi } from "@/hooks/use-api";
+import { AxiosError, AxiosResponse } from "axios";
+import { ToastAction } from "../ui/toast";
+import { ApiErrorResponse } from "@/types/ApiResponses";
+import { Location } from "@/types/Location";
 
 export function CreateLocationDialog(Props: DialogProps) {
+    const api = useApi()
 
     const form = useForm<z.infer<typeof createLocationSchema>>({
         resolver: zodResolver(createLocationSchema),
@@ -46,17 +52,30 @@ export function CreateLocationDialog(Props: DialogProps) {
     //     })
     // }, [])
 
+    function handleReload() {
+        window.location.reload()
+    }
+
     function onSubmit (data: z.infer<typeof createLocationSchema>) {
-        toast({
-            title: 'Deu submit',
-            duration: 1000,
-            description: (
-                <pre>
-                    <code>
-                        {JSON.stringify(form.getValues(), null, 4)}
-                    </code>
-                </pre>
-            )
+        console.log(data);
+        api.post('/locations', data).then((response: AxiosResponse<Location>)=>{
+            console.log(response.data);
+            
+            toast({
+                title: 'Localização cadastrada com sucesso!',
+                description: 'A localização ' + response.data.name + ' foi cadastrada com sucesso .',
+                action: <ToastAction altText="reload page" onClick={handleReload}>recarregar pagina</ToastAction> 
+            })
+        }).catch((error: AxiosError<ApiErrorResponse>)=>{
+            
+            const errorMessage = error.response?.data?.message || error.message || 'Erro desconhecido';
+
+            toast({
+                title: 'Ocorreu um erro',
+                description: errorMessage //podia colocar em form error
+            })
+
+            console.log(error.response?.data);            
         })
     }
 

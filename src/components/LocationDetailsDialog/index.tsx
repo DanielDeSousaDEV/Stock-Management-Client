@@ -35,14 +35,14 @@ export function LocationDetailsDialog({Location, ...Props}: LocationDetailsDialo
         resolver: zodResolver(updateLocationSchema),
         disabled: !isEditable,
         defaultValues: {
-            name: Location.Name,
-            city: Location.City,
+            name: Location.name,
+            city: Location.city,
             CEP: Location.CEP,
-            neighborhood: Location.Neighborhood,
-            street_name: Location.StreetName,
-            number: Location.Number,
-            description: Location.Description,
-            complement: Location.Complement
+            neighborhood: Location.neighborhood,
+            street_name: Location.street_name,
+            number: Location.number,
+            description: Location.description,
+            complement: Location.complement
         }
     })
 
