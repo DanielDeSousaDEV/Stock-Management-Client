@@ -52,7 +52,7 @@ export function Locations() {
         <div>
             <div className="flex items-center justify-between mb-4">
                 <h3 className="text-lg font-semibold capitalize">Localizações</h3>
-                <Button onClick={openCreateLocationDialog}>Fazer uma Movimentação</Button>
+                <Button onClick={openCreateLocationDialog}>Cadastrar uma Localização</Button>
             </div>
 
             <div className="grid grid-cols-4 gap-1">

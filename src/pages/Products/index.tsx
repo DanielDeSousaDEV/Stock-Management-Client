@@ -152,7 +152,7 @@ export function Products() {
                         />
                         <Button className="flex-shrink-0" title="Adicionar uma categoria" size="icon" onClick={openCreateProductDialog}><RiAddLine /></Button>
                     </div>
-                    <div className="grid grid-cols-2 gap-1">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-1">
                         {filteredProducts.map((product)=>(
                             <ProductCard key={product.id} Product={product}/>
                         ))}

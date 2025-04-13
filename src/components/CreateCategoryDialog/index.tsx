@@ -138,7 +138,7 @@ export function CreateCategoryDialog ({...Props}: DialogProps) {
                                         </Button>
                                     </DialogClose>
                                     <Button type="submit">
-                                        Criar Produto
+                                        Criar Categoria
                                     </Button>
                                 </div>
                             </DialogFooter>

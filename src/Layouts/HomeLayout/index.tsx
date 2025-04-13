@@ -1,6 +1,6 @@
 import { Toaster } from "@/components/ui/toaster";
 import { NavigationMenu, NavigationMenuItem, NavigationMenuLink, NavigationMenuList } from "@Components/ui/navigation-menu";
-import { Link, Outlet } from "react-router";
+import { NavLink, Outlet } from "react-router";
 
 export function HomeLayout() {
     return (
@@ -14,19 +14,25 @@ export function HomeLayout() {
                             <NavigationMenu>
                                 <NavigationMenuList>
                                     <NavigationMenuItem>
-                                        <Link to='/Products'>
-                                            <NavigationMenuLink className="text-1xl px-4 py-2 rounded-md font-semibold hover:bg-slate-100 capitalize">Produtos</NavigationMenuLink>
-                                        </Link>
+                                        <NavLink to='/Products'>
+                                            {({isActive}) => (
+                                                <NavigationMenuLink className={`text-1xl px-4 py-2 rounded-md font-semibold hover:bg-slate-100 capitalize ${isActive ? 'bg-slate-100' : ''}`}>Produtos</NavigationMenuLink>
+                                            )}
+                                        </NavLink>
                                     </NavigationMenuItem>
                                     <NavigationMenuItem>
-                                        <Link to='/Locations'>
-                                            <NavigationMenuLink className="text-1xl px-4 py-2 rounded-md font-semibold hover:bg-slate-100 capitalize">Localizações</NavigationMenuLink>
-                                        </Link>
+                                        <NavLink to='/Locations'>
+                                            {({isActive}) => (
+                                                <NavigationMenuLink className={`text-1xl px-4 py-2 rounded-md font-semibold hover:bg-slate-100 capitalize ${isActive ? 'bg-slate-100' : ''}`}>Localizações</NavigationMenuLink>
+                                            )}
+                                        </NavLink>
                                     </NavigationMenuItem>
                                     <NavigationMenuItem>
-                                        <Link to='/'>
-                                            <NavigationMenuLink className="text-1xl px-4 py-2 rounded-md font-semibold hover:bg-slate-100 capitalize">Movimentações</NavigationMenuLink>
-                                        </Link>
+                                        <NavLink to='/'>
+                                            {({isActive}) => (
+                                                <NavigationMenuLink className={`text-1xl px-4 py-2 rounded-md font-semibold hover:bg-slate-100 capitalize ${isActive ? 'bg-slate-100' : ''}`}>Movimentações</NavigationMenuLink>
+                                            )}
+                                        </NavLink>
                                     </NavigationMenuItem>
                                 </NavigationMenuList>
                             </NavigationMenu>

@@ -15,9 +15,42 @@ import { toast } from "@/hooks/use-toast";
 import { ToastAction } from "../ui/toast";
 import { ApiErrorResponse } from "@/types/ApiResponses";
 import { useApi } from "@/hooks/use-api";
+import { useEffect, useState } from "react";
+import { Product } from "@/types/Product";
+import { Location } from "@/types/Location";
 
 export function CreateMovementDialog ({...Props}: DialogProps) {
     const api = useApi();
+    const [products, setProducts] = useState<Product[]>([])
+    const [locations, setLocations] = useState<Location[]>([])
+
+    useEffect(() => {
+        api.get('/products').then((response: AxiosResponse<Product[]>)=>{
+            setProducts(response.data)
+            console.log(response.data);
+            
+        }).catch((error: AxiosError<ApiErrorResponse>)=>{
+            const errorMessage = error.response?.data?.message || error.message || 'Erro desconhecido';
+
+            toast({
+                title: 'Ocorreu um erro',
+                description: errorMessage
+            })
+        }) 
+
+        api.get('/locations').then((response: AxiosResponse<Location[]>)=>{
+            setLocations(response.data)
+            console.log(response.data);
+            
+        }).catch((error: AxiosError<ApiErrorResponse>)=>{
+            const errorMessage = error.response?.data?.message || error.message || 'Erro desconhecido';
+
+            toast({
+                title: 'Ocorreu um erro',
+                description: errorMessage
+            })
+        }) 
+    }, [])
 
     const form = useForm<z.infer<typeof createMovementSchema>>({
         resolver: zodResolver(createMovementSchema),
@@ -77,15 +110,11 @@ export function CreateMovementDialog ({...Props}: DialogProps) {
                                                                 </SelectTrigger>
                                                             </FormControl>
                                                             <SelectContent>
-                                                                <SelectItem value="1">
-                                                                    cotonete
-                                                                </SelectItem>
-                                                                <SelectItem value="2">
-                                                                    cotonete
-                                                                </SelectItem>
-                                                                <SelectItem value="3">
-                                                                    cotonete
-                                                                </SelectItem>
+                                                                {products.map(product => (
+                                                                    <SelectItem value={product.id.toString()}>
+                                                                        {product.name}
+                                                                    </SelectItem>
+                                                                ))}
                                                             </SelectContent>
                                                         </Select>
                                                     <FormMessage />
@@ -105,15 +134,11 @@ export function CreateMovementDialog ({...Props}: DialogProps) {
                                                                 </SelectTrigger>
                                                             </FormControl>
                                                             <SelectContent>
-                                                                <SelectItem value="1">
-                                                                    rua irmã alzira
-                                                                </SelectItem>
-                                                                <SelectItem value="2">
-                                                                    rua aldeido
-                                                                </SelectItem>
-                                                                <SelectItem value="3">
-                                                                    rua eter
-                                                                </SelectItem>
+                                                                {locations.map(location => (
+                                                                    <SelectItem value={location.id.toString()}>
+                                                                        {location.name}
+                                                                    </SelectItem>
+                                                                ))}
                                                             </SelectContent>
                                                         </Select>
                                                     <FormMessage />

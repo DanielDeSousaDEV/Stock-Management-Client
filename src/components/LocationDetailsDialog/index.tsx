@@ -13,12 +13,17 @@ import { useMask } from '@react-input/mask';
 import { toast } from "@/hooks/use-toast";
 import { SyntheticEvent, useState } from "react";
 import { Location } from "@/types/Location";
+import { useApi } from "@/hooks/use-api";
+import { AxiosError, AxiosResponse } from "axios";
+import { ApiResponse } from "@/types/ApiResponses";
+import { ToastAction } from "../ui/toast";
 
 interface LocationDetailsDialogProps extends DialogProps{
     Location: Location
 }
 
 export function LocationDetailsDialog({Location, ...Props}: LocationDetailsDialogProps) {
+    const api = useApi()
     const [isEditable, setIsEditable] = useState<boolean>(false)
 
     function setEditableForm (e: SyntheticEvent) {
@@ -41,7 +46,7 @@ export function LocationDetailsDialog({Location, ...Props}: LocationDetailsDialo
             neighborhood: Location.neighborhood,
             street_name: Location.street_name,
             number: Location.number,
-            description: Location.description,
+            description: Location.description ?? "",
             complement: Location.complement
         }
     })
@@ -53,20 +58,37 @@ export function LocationDetailsDialog({Location, ...Props}: LocationDetailsDialo
         }
     })
 
+    function handleReload() {
+        window.location.reload()
+    }
+
     function onSubmit (data: z.infer<typeof updateLocationSchema>) {
-        // console.log('deu submit');
-        // console.log(data);
+
+        console.log(data);
         
-        toast({
-            title: 'Deu submit',
-            duration: 1000,
-            description: (
-                <pre>
-                    <code>
-                        {JSON.stringify(form.getValues(), null, 4)}
-                    </code>
-                </pre>
-            )
+        api.patch(`/locations/${Location.id}`, data, {
+            headers: {
+                "Content-Type" : 'application/json'
+            }
+        }).then((response: AxiosResponse<ApiResponse>) => {
+            console.log(response.data);
+            
+            toast({
+                title: 'Localização atualizada com sucesso!!',
+                description: 'A localização ' + Location.name + ' foi atualizada com sucesso.',
+                action: <ToastAction altText="reload page" onClick={handleReload}>recarregar pagina</ToastAction> 
+            })
+
+        }).catch((error: AxiosError<ApiResponse>)=>{
+            
+            const errorMessage = error.response?.data?.message || error.message || 'Erro desconhecido';
+
+            toast({
+                title: 'Ocorreu um erro',
+                description: errorMessage //podia colocar em form error
+            })
+
+            console.log(error.response?.data);            
         })
     }
 
@@ -79,7 +101,6 @@ export function LocationDetailsDialog({Location, ...Props}: LocationDetailsDialo
                     </DialogTitle>
                     <DialogDescription>
                         Confira os detalhes da localização abaixo
-                        <input type="checkbox" checked={isEditable} onClick={()=>{setIsEditable(!isEditable)}}/>
                     </DialogDescription>
                 </DialogHeader>
                     <Form {...form}>
