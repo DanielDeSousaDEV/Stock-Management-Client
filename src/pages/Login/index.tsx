@@ -108,7 +108,7 @@ export function Login() {
                     </p>
                 </form>
             </Form>
-            <button onClick={logger}>teste logout</button>
+            {/* <button onClick={logger}>teste logout</button> */}
         </div>
     )
 }
