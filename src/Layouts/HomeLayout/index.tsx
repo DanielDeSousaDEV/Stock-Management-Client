@@ -6,7 +6,7 @@ export function HomeLayout() {
     return (
         <>
             <div className="flex flex-col">
-                <header className="sticky py-4 top-0 bg-white">
+                <header className="sticky py-4 top-0 bg-slate-100">
                     <div className="container mx-auto flex flex-row justify-between items-center content-center">
                         <h2 className="font-semibold text-2xl capitalize">Stock Manager System</h2>
 

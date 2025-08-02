@@ -196,7 +196,7 @@ export function CreateProductDialog({Categories, ...Props}:CreateProductDialogPr
                                                     </FormControl>
                                                     <SelectContent>
                                                         {Categories.map((Category)=>(
-                                                            <SelectItem value={Category.id.toString()}>{Category.name}</SelectItem>
+                                                            <SelectItem value={Category.id.toString()} key={Category.id}>{Category.name}</SelectItem>
                                                         ))}
                                                     </SelectContent>
                                                 </Select>

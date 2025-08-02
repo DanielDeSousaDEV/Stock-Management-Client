@@ -86,6 +86,21 @@ export function CreateMovementDialog ({...Props}: DialogProps) {
         })
     }
 
+    function getMaxQuantityInputValue() {
+        const watchProductId = form.watch('product_id');
+        const watchMovementType = form.watch('type');   
+    
+        const product = products?.find((
+            product => product.id == Number(watchProductId)
+        ))
+
+        if (watchMovementType === 'output') {
+            return product?.quantity
+        }
+        
+        return undefined
+    }
+
     return (
         <Dialog {...Props}>
             <DialogContent>
@@ -111,7 +126,7 @@ export function CreateMovementDialog ({...Props}: DialogProps) {
                                                             </FormControl>
                                                             <SelectContent>
                                                                 {products.map(product => (
-                                                                    <SelectItem value={product.id.toString()}>
+                                                                    <SelectItem value={product.id.toString()} key={product.id}>
                                                                         {product.name}
                                                                     </SelectItem>
                                                                 ))}
@@ -151,7 +166,7 @@ export function CreateMovementDialog ({...Props}: DialogProps) {
                                             render={({field})=>(
                                                 <FormItem>
                                                     <FormLabel>Quantidade<span className="text-red-400">*</span>:</FormLabel>
-                                                        <Input type="number" {...field}/>
+                                                        <Input type="number" {...field} max={getMaxQuantityInputValue()}/>
                                                     <FormMessage />
                                                 </FormItem>
                                             )}
