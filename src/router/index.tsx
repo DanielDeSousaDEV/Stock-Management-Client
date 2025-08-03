@@ -5,8 +5,8 @@ import { Products } from "@/pages/Products";
 import { Login } from "@/pages/Login";
 import { SignUp } from "@/pages/SignUp";
 import { ProtectedRoutes } from "@/components/ProtectedRoutes";
-import { LoginLayout } from "@/Layouts/LoginLayout";
-import { HomeLayout } from "@/Layouts/HomeLayout";
+import { LoginLayout } from "@/layouts/LoginLayout";
+import { HomeLayout } from "@/layouts/HomeLayout";
 
 export function MyRoutes() {
     return (
