@@ -88,7 +88,7 @@ export function CategoryListItem({Category, ...Props}:CategoryListItemProps) {
                 </PopoverTrigger>
                 <PopoverContent side="right" className="w-fit">
                     <div className="flex flex-col gap-1">
-                        <Button size="sm" variant="outline" className="flex-shrink-0 text-left w-28"><BiSolidPencil />Editar</Button>
+                        {/* <Button size="sm" variant="outline" className="flex-shrink-0 text-left w-28"><BiSolidPencil />Editar</Button> */}
                         <Button size="sm" variant="outline" className="flex-shrink-0 text-left w-28" onClick={handleDeleteCategory}><BiSolidTrashAlt />Apagar</Button>
                     </div>
                 </PopoverContent>
