@@ -11,7 +11,7 @@ import { Textarea } from "../ui/textarea";
 import { Button } from "../ui/button";
 import { useApi } from "@/hooks/use-api";
 import { AxiosError, AxiosResponse } from "axios";
-import { ApiErrorResponse, ApiResponse } from "@/types/ApiResponses";
+import { ApiErrorResponse } from "@/types/ApiResponses";
 import { ToastAction } from "../ui/toast";
 import { toast } from "@/hooks/use-toast";
 import { Category } from "@/types/Category";
@@ -65,12 +65,7 @@ export function CreateCategoryDialog ({...Props}: DialogProps) {
             console.log(error.response?.data); 
         })
     }
-
-    function logger() {
-        console.log(form.getValues());
-        console.log(form.getFieldState("name"))
-    }
-
+    
     return (
         <Dialog {...Props}>
             <DialogContent>

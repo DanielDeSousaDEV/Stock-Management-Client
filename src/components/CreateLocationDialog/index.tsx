@@ -11,7 +11,6 @@ import { createLocationSchema } from "@/utils/validation/location";
 import { useForm } from "react-hook-form";
 import { useMask } from '@react-input/mask';
 import { toast } from "@/hooks/use-toast";
-import { useState } from "react";
 import { useApi } from "@/hooks/use-api";
 import { AxiosError, AxiosResponse } from "axios";
 import { ToastAction } from "../ui/toast";
@@ -41,8 +40,6 @@ export function CreateLocationDialog(Props: DialogProps) {
             d: /[0-9]/
         }
     })
-
-    const [isEditable, setIsEditable] = useState<boolean>(false)
     
     // const [possibleStates, setPossibleStates] = useState<AxiosResponse>()
     // useEffect(()=>{
@@ -216,7 +213,7 @@ export function CreateLocationDialog(Props: DialogProps) {
                                         </Button>
                                     </DialogClose>
                                     <Button type="submit">
-                                        Criar Produto
+                                        Criar Localização
                                     </Button>
                                 </div>
                             </DialogFooter>
