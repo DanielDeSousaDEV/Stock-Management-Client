@@ -1,48 +1,55 @@
 import { Toaster } from "@/components/ui/toaster";
 import { NavigationMenu, NavigationMenuItem, NavigationMenuLink, NavigationMenuList } from "@Components/ui/navigation-menu";
+import { ArrowLeftRight, MapPin, Package } from "lucide-react";
 import { NavLink, Outlet } from "react-router";
+import { useMediaQuery } from 'usehooks-ts'
 
 export function HomeLayout() {
+    const isMobile = useMediaQuery('(max-width: 480px)')
+
     return (
         <>
             <div className="flex flex-col">
-                <header className="sticky py-4 top-0 bg-slate-100">
+                <header className="sticky p-2 md:p-4 top-0 bg-slate-100">
                     <div className="container mx-auto flex flex-row justify-between items-center content-center">
-                        <h2 className="font-semibold text-2xl capitalize">Stock Manager System</h2>
+                        <h2 className="font-semibold text-xl md:text-2xl capitalize">Stock Manager System</h2>
 
                         <nav>
                             <NavigationMenu>
-                                <NavigationMenuList>
+                                <NavigationMenuList className="flex gap-2 md:gap-0">
                                     <NavigationMenuItem>
-                                        <NavLink to='/Products'>
-                                            {({isActive}) => (
-                                                <NavigationMenuLink className={`text-1xl px-4 py-2 rounded-md font-semibold hover:bg-slate-100 capitalize ${isActive ? 'bg-slate-100' : ''}`}>Produtos</NavigationMenuLink>
-                                            )}
-                                        </NavLink>
+                                            <NavigationMenuLink asChild>
+                                                <NavLink to='/Products' className={({isActive}) => `text-1xl px-4 py-2 rounded-md font-semibold md:hover:bg-slate-200 capitalize ${isActive ? 'md:bg-slate-200' : ''}`}>
+                                                        {isMobile ? <Package /> : 'Produtos'}
+                                                </NavLink>
+                                            </NavigationMenuLink>
                                     </NavigationMenuItem>
                                     <NavigationMenuItem>
-                                        <NavLink to='/Locations'>
-                                            {({isActive}) => (
-                                                <NavigationMenuLink className={`text-1xl px-4 py-2 rounded-md font-semibold hover:bg-slate-100 capitalize ${isActive ? 'bg-slate-100' : ''}`}>Localizações</NavigationMenuLink>
-                                            )}
-                                        </NavLink>
+                                        <NavigationMenuLink asChild>
+                                            <NavLink to='/Locations' className={({isActive}) => `text-1xl px-4 py-2 rounded-md font-semibold md:hover:bg-slate-200 capitalize ${isActive ? 'md:bg-slate-200' : ''}`}>
+                                                        {isMobile ? <MapPin /> : 'Localizações'}
+                                            </NavLink>
+                                        </NavigationMenuLink>
                                     </NavigationMenuItem>
                                     <NavigationMenuItem>
-                                        <NavLink to='/'>
-                                            {({isActive}) => (
-                                                <NavigationMenuLink className={`text-1xl px-4 py-2 rounded-md font-semibold hover:bg-slate-100 capitalize ${isActive ? 'bg-slate-100' : ''}`}>Movimentações</NavigationMenuLink>
-                                            )}
-                                        </NavLink>
+                                        <NavigationMenuLink asChild>
+                                            <NavLink to='/' className={({isActive}) => `text-1xl px-4 py-2 rounded-md font-semibold md:hover:bg-slate-200 capitalize ${isActive ? 'md:bg-slate-200' : ''}`}>
+                                                    {isMobile ? <ArrowLeftRight /> : 'Movimentações'}
+                                            </NavLink>
+                                        </NavigationMenuLink>
                                     </NavigationMenuItem>
                                 </NavigationMenuList>
                             </NavigationMenu>
                         </nav>
                     </div>
                 </header>
+
+                <div className="container mx-auto p-2 md:p-4">
+                    <main className="bg-slate-100 my-4 p-2 rounded-lg">
+                        <Outlet />
+                    </main>
+                </div>
                 
-                <main className="bg-slate-100 my-4 container mx-auto p-2 rounded-lg">
-                    <Outlet />
-                </main>
 
                 <Toaster />
             </div>
