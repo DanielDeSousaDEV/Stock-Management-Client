@@ -86,7 +86,7 @@ export function CreateProductDialog({Categories, ...Props}:CreateProductDialogPr
                 </DialogHeader>
                     <Form {...form}>
                         <form onSubmit={form.handleSubmit(onSubmit)} encType="multipart/form-data">
-                            <div className="grid grid-cols-2 gap-2 mb-2">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mb-2">
                                 <FormField 
                                     control={form.control}
                                     name="name"

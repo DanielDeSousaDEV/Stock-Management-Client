@@ -83,7 +83,7 @@ export function CategoryListItem({Category, ...Props}:CategoryListItemProps) {
                 <label htmlFor={Category.id + Category.name} className="w-full">{Category.name}</label>
             </div>
             <Popover>
-                <PopoverTrigger>
+                <PopoverTrigger asChild>
                     <Button className="h-6 w-6" variant="ghost"><IoEllipsisHorizontal /></Button>
                 </PopoverTrigger>
                 <PopoverContent side="right" className="w-fit">

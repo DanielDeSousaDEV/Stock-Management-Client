@@ -55,7 +55,7 @@ export function Locations() {
                 <Button onClick={openCreateLocationDialog}>Cadastrar uma Localização</Button>
             </div>
 
-            <div className="grid grid-cols-4 gap-1">
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-1">
                 {locations.map((location)=>(
                     <LocationCard handlerOpenDetails={openLocationDetailsDialog} key={location.id} Location={location}/>
                 ))}

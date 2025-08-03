@@ -54,7 +54,7 @@ export function MovementAccordion({Movement, ...Props}:MovementAccordionProps) {
                 </div>
             </AccordionTrigger>
             <AccordionContent>
-                <div className="inline-flex justify-between w-full gap-0.5">
+                <div className="inline-flex justify-between w-full gap-0.5 ">
                     <div className="flex flex-col w-full">
                         <div className="flex items-center gap-1 text-base font-semibold mb-2">
                             <BiBox /><h4>Produto</h4>

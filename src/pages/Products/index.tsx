@@ -119,7 +119,7 @@ export function Products() {
     });
 
     return (
-        <div className="grid grid-cols-3 gap-2">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
             <filter.Provider value={[selectedCategories, setSelectedCategories]}>
                 <div className="col-span-1 bg-slate-200 rounded-lg p-2">
                     <div className="mb-4">
@@ -140,7 +140,7 @@ export function Products() {
                     </div>
                 </div>
 
-                <div className="col-span-2 bg-slate-200 rounded-lg p-2">
+                <div className="col-span-1 md:col-span-2 bg-slate-200 rounded-lg p-2">
                     <div className="mb-4">
                         <h3 className="text-lg font-semibold capitalize">Produtos</h3>
                     </div>
