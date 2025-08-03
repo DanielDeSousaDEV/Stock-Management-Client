@@ -12,7 +12,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from ".
 import { Category } from "@/types/Category";
 import { useApi } from "@/hooks/use-api";
 import { AxiosError, AxiosResponse } from "axios";
-import { ApiErrorResponse, ApiResponse } from "@/types/ApiResponses";
+import { ApiErrorResponse } from "@/types/ApiResponses";
 import { Product } from "@/types/Product";
 import { toast } from "@/hooks/use-toast";
 import { ToastAction } from "../ui/toast";

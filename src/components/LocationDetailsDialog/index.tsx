@@ -62,6 +62,33 @@ export function LocationDetailsDialog({Location, ...Props}: LocationDetailsDialo
         window.location.reload()
     }
 
+    function handleDeleteLocalization(location: Location) {
+        api.delete(`/locations/${location.id}`, {
+            headers: {
+                "Content-Type" : 'application/json'
+            }
+        }).then((response: AxiosResponse<ApiResponse>) => {
+            console.log(response.data);
+            
+            toast({
+                title: 'Localização deletada com sucesso!!',
+                description: 'A localização ' + Location.name + ' foi deletada com sucesso.',
+                action: <ToastAction altText="reload page" onClick={handleReload}>recarregar pagina</ToastAction> 
+            })
+
+        }).catch((error: AxiosError<ApiResponse>)=>{
+            
+            const errorMessage = error.response?.data?.message || error.message || 'Erro desconhecido';
+
+            toast({
+                title: 'Ocorreu um erro',
+                description: errorMessage //podia colocar em form error
+            })
+
+            console.log(error.response?.data);            
+        })
+    }
+
     function onSubmit (data: z.infer<typeof updateLocationSchema>) {
 
         console.log(data);
@@ -241,7 +268,7 @@ export function LocationDetailsDialog({Location, ...Props}: LocationDetailsDialo
                                     </div>
                                 ) || (
                                     <div className="flex justify-end gap-2">
-                                        <Button type="button" variant="destructive">
+                                        <Button type="button" variant="destructive" onClick={() => handleDeleteLocalization(Location)}>
                                             Deletar
                                         </Button>
                                         <Button type="button" onClick={setEditableForm}>

@@ -1,15 +1,14 @@
 import { useApi } from "@/hooks/use-api";
 import { toast } from "@/hooks/use-toast";
-import { ApiAuthResponse, ApiErrorResponse, ApiResponse } from "@/types/ApiResponses";
+import { ApiAuthResponse, ApiErrorResponse } from "@/types/ApiResponses";
 import { Button } from "@Components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@Components/ui/form";
 import { Input } from "@Components/ui/input";
 import { loginSchema } from "@Utils/validation/login";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AxiosError, AxiosResponse } from "axios";
-import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { Link, redirect, useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { z } from "zod";
 
 export function Login() {
@@ -53,14 +52,6 @@ export function Login() {
                 title: 'Ocorreu um erro',
                 description: errorMessage
             })            
-        })
-    }
-
-    function logger() {
-        api.post('/logout', { email: 'daniel@teste.com', password: 'dandan' }, {withCredentials: true}).then((response: AxiosResponse<ApiAuthResponse>)=>{
-            localStorage.removeItem('ApiToken')
-            console.log(response);
-            
         })
     }
 
@@ -108,7 +99,6 @@ export function Login() {
                     </p>
                 </form>
             </Form>
-            {/* <button onClick={logger}>teste logout</button> */}
         </div>
     )
 }

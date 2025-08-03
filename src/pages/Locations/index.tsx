@@ -7,7 +7,7 @@ import { toast } from "@/hooks/use-toast";
 import { ApiErrorResponse } from "@/types/ApiResponses";
 import { Location } from "@/types/Location";
 import { AxiosError, AxiosResponse } from "axios";
-import { SyntheticEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 export function Locations() {
     const api = useApi()
@@ -33,9 +33,6 @@ export function Locations() {
     const openCreateLocationDialog = () => {
         setIsCreateLocationDialogOpen(true)
     }
-    const closeCreateLocationDialog = () => {
-        setIsCreateLocationDialogOpen(false)
-    }
     
     const [isLocationDetailsDialogOpen, setIsLocationDetailsDialogOpen] = useState<boolean>(false)
     const [locationSelected, setLocationSelected] = useState<Location>({} as Location)
@@ -43,9 +40,6 @@ export function Locations() {
     const openLocationDetailsDialog = (Location: Location) => {
         setLocationSelected(Location)
         setIsLocationDetailsDialogOpen(true)
-    }
-    const closeLocationDetailsDialog = (e: SyntheticEvent) => {
-        setIsLocationDetailsDialogOpen(false)
     }
 
     return (

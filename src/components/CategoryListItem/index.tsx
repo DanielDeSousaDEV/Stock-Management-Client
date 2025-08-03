@@ -1,5 +1,5 @@
 import { PopoverContent } from "@Components/ui/popover";
-import { BiSolidPencil, BiSolidTrashAlt } from "react-icons/bi";
+import { BiSolidTrashAlt } from "react-icons/bi";
 import { IoEllipsisHorizontal } from "react-icons/io5";
 import { Button } from "@Components/ui/button";
 import { Popover, PopoverTrigger } from "@Components/ui/popover";
@@ -42,8 +42,6 @@ export function CategoryListItem({Category, ...Props}:CategoryListItemProps) {
         }
 
         setCategoryFilterList((prev: string[])=>{
-            const deletedCategory = prev.splice(indexOfCategory, 1)
-
             return [
                 ...prev
             ]
