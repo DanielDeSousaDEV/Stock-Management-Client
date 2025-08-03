@@ -1,7 +1,7 @@
 import { CreateMovementDialog } from "@/components/CreateMovementDialog";
 import { useApi } from "@/hooks/use-api";
 import { toast } from "@/hooks/use-toast";
-import { ApiErrorResponse, ApiResponse } from "@/types/ApiResponses";
+import { ApiErrorResponse } from "@/types/ApiResponses";
 import { Movement } from "@/types/Movement";
 import { MovementAccordion } from "@Components/MovementAccordion";
 import { Accordion } from "@Components/ui/accordion";
@@ -16,9 +16,6 @@ export function Movements() {
 
     const openCreateMovementDialog = () => {
         setIsCreateMovementDialogOpen(true)
-    }
-    const closeCreateMovementDialog = () => {
-        setIsCreateMovementDialogOpen(false)
     }
 
     const [movements, setMovements] = useState<Movement[]>([]);

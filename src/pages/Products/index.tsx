@@ -73,17 +73,11 @@ export function Products() {
     const openCreateProductDialog = () => {
         setIsCreateProductDialogOpen(true)
     }
-    const closeCreateProductDialog = () => {
-        setIsCreateProductDialogOpen(false)
-    }
 
     const [isCreateCategoryDialogOpen, setIsCreateCategoryDialogOpen] = useState<boolean>(false)
 
     const openCreateCategoryDialog = () => {
         setIsCreateCategoryDialogOpen(true)
-    }
-    const closeCreateCategoryDialog = () => {
-        setIsCreateCategoryDialogOpen(false)
     }
 
     const filteredCategories = categories.filter(category => {
