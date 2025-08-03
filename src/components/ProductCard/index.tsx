@@ -1,7 +1,7 @@
 import { RiErrorWarningLine } from "react-icons/ri";
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@Components/ui/card";
-import { Popover, PopoverContent, PopoverTrigger } from "@Components/ui/popover";
-import { Badge } from "@Components/ui/badge";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Badge } from "@/components/ui/badge";
 import { Product } from "@/types/Product";
 
 export interface ProductCardProps {

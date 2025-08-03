@@ -1,5 +1,5 @@
-import { Movement } from "@Types/Movement";
-import { AccordionContent, AccordionItem, AccordionTrigger } from "@Components/ui/accordion";
+import { Movement } from "@/types/Movement";
+import { AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import React from "react";
 import { BiBox, BiMap, BiSolidAdjust } from "react-icons/bi";
 import { RiLoginCircleLine, RiLogoutCircleRLine, RiQuestionLine } from "react-icons/ri";

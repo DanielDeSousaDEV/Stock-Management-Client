@@ -1,10 +1,10 @@
 import { useApi } from "@/hooks/use-api";
 import { toast } from "@/hooks/use-toast";
 import { ApiAuthResponse, ApiErrorResponse } from "@/types/ApiResponses";
-import { Button } from "@Components/ui/button";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@Components/ui/form";
-import { Input } from "@Components/ui/input";
-import { loginSchema } from "@Utils/validation/login";
+import { Button } from "@/components/ui/button";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { loginSchema } from "@/utils/validation/login";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AxiosError, AxiosResponse } from "axios";
 import { useForm } from "react-hook-form";

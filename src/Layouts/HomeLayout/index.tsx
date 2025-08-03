@@ -1,5 +1,5 @@
 import { Toaster } from "@/components/ui/toaster";
-import { NavigationMenu, NavigationMenuItem, NavigationMenuLink, NavigationMenuList } from "@Components/ui/navigation-menu";
+import { NavigationMenu, NavigationMenuItem, NavigationMenuLink, NavigationMenuList } from "@/components/ui/navigation-menu";
 import { ArrowLeftRight, MapPin, Package } from "lucide-react";
 import { NavLink, Outlet } from "react-router";
 import { useMediaQuery } from 'usehooks-ts'

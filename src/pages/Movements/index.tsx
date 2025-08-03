@@ -3,9 +3,9 @@ import { useApi } from "@/hooks/use-api";
 import { toast } from "@/hooks/use-toast";
 import { ApiErrorResponse } from "@/types/ApiResponses";
 import { Movement } from "@/types/Movement";
-import { MovementAccordion } from "@Components/MovementAccordion";
-import { Accordion } from "@Components/ui/accordion";
-import { Button } from "@Components/ui/button";
+import { MovementAccordion } from "@/components/MovementAccordion";
+import { Accordion } from "@/components/ui/accordion";
+import { Button } from "@/components/ui/button";
 import { AxiosError, AxiosResponse } from "axios";
 import { useEffect, useState } from "react";
 

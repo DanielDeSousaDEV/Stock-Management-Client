@@ -1,9 +1,9 @@
-import { PopoverContent } from "@Components/ui/popover";
+import { PopoverContent } from "@/components/ui/popover";
 import { BiSolidTrashAlt } from "react-icons/bi";
 import { IoEllipsisHorizontal } from "react-icons/io5";
-import { Button } from "@Components/ui/button";
-import { Popover, PopoverTrigger } from "@Components/ui/popover";
-import { Checkbox } from "@Components/ui/checkbox";
+import { Button } from "@/components/ui/button";
+import { Popover, PopoverTrigger } from "@/components/ui/popover";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Category } from "@/types/Category";
 import { CheckboxProps } from "@radix-ui/react-checkbox";
 import { useContext } from "react";
