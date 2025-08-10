@@ -27,6 +27,7 @@ export function MyRoutes() {
                 <Route path="Locations" element={<Locations />}/>
                 <Route path="Products" element={<Products />}/>
             </Route> */}
+            <HomerLayout/>
             <Route path="/">
                 <Route index element={<Movements />}/>
                 <Route path="Locations" element={<Locations />}/>
