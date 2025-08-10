@@ -5,7 +5,7 @@ import { Products } from "@/pages/Products";
 import { Login } from "@/pages/Login";
 import { SignUp } from "@/pages/SignUp";
 import { ProtectedRoutes } from "@/components/ProtectedRoutes";
-// import { Homelayout } from "@/layouts/Homelayout";
+import { Homelayout } from "@/layouts/Home";
 import { LoginLayout } from "@/layouts/Login";
 // import '@/layouts/Homelayout/simple.js';
 
