@@ -5,9 +5,8 @@ import { Products } from "@/pages/Products";
 import { Login } from "@/pages/Login";
 import { SignUp } from "@/pages/SignUp";
 import { ProtectedRoutes } from "@/components/ProtectedRoutes";
-import { Homelayout } from "@/layouts/Home";
-import { LoginLayout } from "@/layouts/Login";
-// import '@/layouts/Homelayout/simple.js';
+import { Homelayout } from "@/layouts/HomeLayout";
+import { LoginLayout } from "@/layouts/LoginLayout";
 
 export function MyRoutes() {
     return (
@@ -28,10 +27,6 @@ export function MyRoutes() {
                 <Route path="Locations" element={<Locations />}/>
                 <Route path="Products" element={<Products />}/>
             </Route>
-
-            {/* <Route index element={<Movements />}/>
-            <Route path="Locations" element={<Locations />}/>
-            <Route path="Products" element={<Products />}/> */}
         </Routes>
     )
 }
