@@ -4,7 +4,7 @@ import { ArrowLeftRight, MapPin, Package } from "lucide-react";
 import { NavLink, Outlet } from "react-router";
 import { useMediaQuery } from 'usehooks-ts'
 
-export function HomeLayout() {
+export default function HomeLayout() {
     const isMobile = useMediaQuery('(max-width: 480px)')
 
     return (
