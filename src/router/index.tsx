@@ -18,7 +18,7 @@ export function MyRoutes() {
             </Route>
 
             {/* Rotas das funcionalidades principais */}
-            <Route path="/" element={
+            {/* <Route path="/" element={
                 <ProtectedRoutes>
                     <HomerLayout />                    
                 </ProtectedRoutes>
@@ -26,12 +26,12 @@ export function MyRoutes() {
                 <Route index element={<Movements />}/>
                 <Route path="Locations" element={<Locations />}/>
                 <Route path="Products" element={<Products />}/>
-            </Route>
-            {/* <Route path="/">
+            </Route> */}
+            <Route path="/">
                 <Route index element={<Movements />}/>
                 <Route path="Locations" element={<Locations />}/>
                 <Route path="Products" element={<Products />}/>
-            </Route> */}
+            </Route>
         </Routes>
     )
 }
