@@ -1,17 +1,17 @@
-# Exported from Render on 2025-08-03T23:04:52Z
-services:
-- type: web
-  name: Stock-Management-Client
-  runtime: static
-  repo: https://github.com/DanielDeSousaDEV/Stock-Management-Client
-  envVars:
-  - key: VITE_API_URL
-    sync: false
-  buildCommand: npm install; npm run build
-  staticPublishPath: ./dist
-  routes:
-  - type: rewrite
-    source: /*
-    destination: /index.html
-  autoDeployTrigger: commit
-version: "1"
+# # Exported from Render on 2025-08-03T23:04:52Z
+# services:
+# - type: web
+#   name: Stock-Management-Client
+#   runtime: static
+#   repo: https://github.com/DanielDeSousaDEV/Stock-Management-Client
+#   envVars:
+#   - key: VITE_API_URL
+#     sync: false
+#   buildCommand: npm install; npm run build
+#   staticPublishPath: ./dist
+#   routes:
+#   - type: rewrite
+#     source: /*
+#     destination: /index.html
+#   autoDeployTrigger: commit
+# version: "1"
