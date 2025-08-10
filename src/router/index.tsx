@@ -5,24 +5,22 @@ import { Products } from "@/pages/Products";
 import { Login } from "@/pages/Login";
 import { SignUp } from "@/pages/SignUp";
 import { ProtectedRoutes } from "@/components/ProtectedRoutes";
-import { LoginLayout } from "@/layouts/IndexLayout";
-// import { LoginLayout } from "@/layouts/LoginLayout";
-// import { HomeLayout } from "@/layouts/HomeLayout";
-// import { IndexLayout } from "@/layouts/IndexLayout";
+import { LoginLayout } from "@/layouts/LoginLayout";
+import { HomeLayout } from "@/layouts/HomeLayout";
 
 export function MyRoutes() {
     return (
         <Routes>
             {/* Rotas de Login/Cadastro */}
-            {/* <Route path="/" element={<LoginLayout />}>
+            <Route path="/" element={<LoginLayout />}>
                 <Route path="Login" element={<Login />}/>
                 <Route path="SignUp" element={<SignUp/>}/>
-            </Route> */}
+            </Route>
 
             {/* Rotas das funcionalidades principais */}
             <Route path="/" element={
                 <ProtectedRoutes>
-                    <LoginLayout />                    
+                    <HomeLayout />                    
                 </ProtectedRoutes>
             }>
                 <Route index element={<Movements />}/>
