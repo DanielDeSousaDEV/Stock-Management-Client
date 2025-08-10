@@ -5,7 +5,7 @@
 import { Outlet } from 'react-router'
 // import { useMediaQuery } from 'usehooks-ts'
 
-export function HomeLayout() {
+export function Homelayout() {
     // const isMobile = useMediaQuery('(max-width: 480px)')
 
     return (
