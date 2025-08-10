@@ -7,7 +7,7 @@ import { SignUp } from "@/pages/SignUp";
 import { ProtectedRoutes } from "@/components/ProtectedRoutes";
 import { LoginLayout } from "@/layouts/LoginLayout";
 // import { HomeLayout } from "@/layouts/HomeLayout";
-import { HomiLayout } from "@/layouts/HomiLayout";
+import { LogeLayout } from "@/layouts/LogeLayout";
 
 export function MyRoutes() {
     return (
@@ -21,7 +21,7 @@ export function MyRoutes() {
             {/* Rotas das funcionalidades principais */}
             <Route path="/" element={
                 <ProtectedRoutes>
-                    <HomiLayout />
+                    <LogeLayout />
                 </ProtectedRoutes>
             }>
                 <Route index element={<Movements />}/>
