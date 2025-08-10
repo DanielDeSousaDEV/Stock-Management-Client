@@ -9,7 +9,7 @@ export function Homelayout() {
     // const isMobile = useMediaQuery('(max-width: 480px)')
 
     return (
-        <>
+        <div>
             {/* <div className="flex flex-col">
                 <header className="sticky p-2 md:p-4 top-0 bg-slate-100">
                     <div className="container mx-auto flex flex-row justify-between items-center content-center">
@@ -56,6 +56,6 @@ export function Homelayout() {
             </div> */}
             <h1>daniel</h1>
             <Outlet />
-        </>
+        </div>
     )
 }
