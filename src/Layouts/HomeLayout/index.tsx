@@ -1,7 +1,8 @@
-import { Toaster } from "@/components/ui/toaster";
-import { NavigationMenu, NavigationMenuItem, NavigationMenuLink, NavigationMenuList } from "@/components/ui/navigation-menu";
-import { ArrowLeftRight, MapPin, Package } from "lucide-react";
-import { NavLink, Outlet } from "react-router";
+// import { Toaster } from "@/components/ui/toaster";
+// import { NavigationMenu, NavigationMenuItem, NavigationMenuLink, NavigationMenuList } from "@/components/ui/navigation-menu";
+// import { ArrowLeftRight, MapPin, Package } from "lucide-react";
+// import { NavLink, Outlet } from "react-router";
+import { Outlet } from 'react-router'
 import { useMediaQuery } from 'usehooks-ts'
 
 export function HomeLayout() {
@@ -54,7 +55,7 @@ export function HomeLayout() {
                 <Toaster />
             </div> */}
             <h1>daniel</h1>
-            <Outlet/>
+            <Outlet />
         </>
     )
 }
