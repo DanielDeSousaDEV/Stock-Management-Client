@@ -4,12 +4,12 @@ import { ArrowLeftRight, MapPin, Package } from "lucide-react";
 import { NavLink, Outlet } from "react-router";
 import { useMediaQuery } from 'usehooks-ts'
 
-export function HomeLayout() {
+export function HomiLayout() {
     const isMobile = useMediaQuery('(max-width: 480px)')
 
     return (
         <>
-            {/* <div className="flex flex-col">
+            <div className="flex flex-col">
                 <header className="sticky p-2 md:p-4 top-0 bg-slate-100">
                     <div className="container mx-auto flex flex-row justify-between items-center content-center">
                         <h2 className="font-semibold text-xl md:text-2xl capitalize">Stock Manager System</h2>
@@ -52,9 +52,7 @@ export function HomeLayout() {
                 
 
                 <Toaster />
-            </div> */}
-            <h1>daniel</h1>
-            <Outlet/>
+            </div>
         </>
     )
 }
