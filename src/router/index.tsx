@@ -8,6 +8,8 @@ import { ProtectedRoutes } from "@/components/ProtectedRoutes";
 import { Homelayout } from "@/layouts/Homelayout";
 import { LoginLayout } from "@/layouts/LoginLayout";
 import '@/layouts/Homelayout/simple.js';
+import '@/layouts/Loginlayout/simple2.js';
+import '@/layouts/LoginLayout/simple2.js';
 
 export function MyRoutes() {
     return (
