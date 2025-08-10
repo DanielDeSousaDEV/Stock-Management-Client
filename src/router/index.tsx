@@ -5,10 +5,9 @@ import { Products } from "@/pages/Products";
 import { Login } from "@/pages/Login";
 import { SignUp } from "@/pages/SignUp";
 import { ProtectedRoutes } from "@/components/ProtectedRoutes";
-import { Homelayout } from "@/layouts/Homelayout";
-import { LoginLayout } from "@/layouts/LoginLayout";
+// import { Homelayout } from "@/layouts/Homelayout";
+import { LoginLayout } from "@/layouts/Login";
 // import '@/layouts/Homelayout/simple.js';
-import '@/layouts/LoginLayout/simple2.js';
 
 export function MyRoutes() {
     return (
