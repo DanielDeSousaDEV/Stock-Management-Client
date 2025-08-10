@@ -7,6 +7,7 @@ import { SignUp } from "@/pages/SignUp";
 import { ProtectedRoutes } from "@/components/ProtectedRoutes";
 import { LoginLayout } from "@/layouts/LoginLayout";
 import { HomerLayout } from "@/layouts/HomerLayout";
+import { HomeLayout } from "@/layouts/HomeLayout";
 
 export function MyRoutes() {
     return (
@@ -27,7 +28,7 @@ export function MyRoutes() {
                 <Route path="Locations" element={<Locations />}/>
                 <Route path="Products" element={<Products />}/>
             </Route> */}
-            <HomerLayout/>
+            <HomeLayout/>
             <Route path="/">
                 <Route index element={<Movements />}/>
                 <Route path="Locations" element={<Locations />}/>
